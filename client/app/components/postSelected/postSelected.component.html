@@ -1,0 +1,18 @@
+<div class="selected-post">
+    <section>
+        <span id="title">{{selectedPost.title}}</span>
+        <div id="name-date-wrap">
+            <span id="name">{{selectedPost.authorName}}</span>
+            <span id="date">{{selectedPost.dateAdded | date}}</span>
+        </div>
+        <div id="content">{{selectedPost.content}}</div>
+        <div class="post-actions">
+            <a class="link-as-button" id="edit-post-link" [routerLink]="['/editpost', selectedPost._id]" *ngIf="authService.authenticated()">Edit current post</a>
+            <button id="delete-post-button" (click)="deletePost()" *ngIf="authService.authenticated()">Delete current post</button>
+            <!--<button id="back-button" (click)="goBack()">Go back</button>-->
+        </div>
+    </section>
+
+    <add-comment></add-comment>
+    <comment-list-wrapper></comment-list-wrapper>
+</div>

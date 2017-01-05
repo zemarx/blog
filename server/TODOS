@@ -1,0 +1,68 @@
+
+//--------------------DATABASE------------------------------
+
+        _____________PROBABLY IS NOT NEEDED BECAUSE OF AUTH0___
+        |=User                                                 |
+        |    -userId                                           |
+        |    -username                                         |
+        |    -persmissions = "admin|user|..."                  |
+        --------------------------------------------------------
+
+
+=Post
+    -postId
+    -authorName
+    -title
+    -content
+    -dateAdded
+
+=Comment
+    -commentId
+    -postId(ref -> Post)
+    -parentId(ref -> Comment)
+    -commentAuthor
+    -content
+    -dateAdded
+
+//--------------------DATABASE FUNCTIONS---------------------
+
+POSTS:
+    DONE: GET ALL POSTS     --GET--
+    DONE: ADD/CREATE POST   --POST--
+    DONE: GET ONE POST      --GET--
+    DONE: DELETE ONE POST   --DELETE--
+    DONE: UPDATE ONE POST   --PUT--
+
+COMMENTS:
+    TODO: GET ALL COMMENTS FOR POST     --GET--
+    TODO: ADD ONE COMMENT TO POST       --POST--
+    TODO: DELETE ONE COMMENT FROM POST  --DELETE--
+    TODO: ????
+
+
+
+
+
+//--------------------FUNCTIONALITY--------------------------
+
+TODO: MAKE POST FILTER BY YEAR OR MONTH
+
+DONE: CAN UPDATE SELECTED POST
+
+DONE: MOVE "DELETE POST" TO SELECTED POST
+
+TODO: MAKE COMMENTS
+
+DONE: MAKE LOGIN AND (MAYBE REGISTRATION) #Update: made with Auth0
+
+TODO: PAGES!
+
+
+//----------------------STYLES--------------------------------
+
+
+TODO: POSTLIST STYLES
+
+TODO: SELECTED POST STYLES
+
+TODO: CREATE POST STYLES
