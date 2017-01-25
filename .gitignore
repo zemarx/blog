@@ -6,3 +6,4 @@ client/app/**/*.js
 client/app/**/*.js.map
 !client/app/util/apiCaller.js
 !client/app/util/dateLocal.js
+server/config/**/*.js

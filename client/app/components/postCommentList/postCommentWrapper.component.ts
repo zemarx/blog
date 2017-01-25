@@ -4,8 +4,7 @@ import {CommentService} from "../../services/comment.service";
 @Component({
     moduleId: module.id,
     selector: 'comment-list-wrapper',
-    template: '<comment-list class="comment-list-wrapper" [comments]="comments"></comment-list>',
-    styleUrls: ['postCommentWrapper.component.css']
+    template: '<comment-list class="comment-list-wrapper" [comments]="comments"></comment-list>'
 })
 export class PostCommentWrapper implements OnInit {
     comments: Object[];

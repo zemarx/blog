@@ -3,21 +3,9 @@ import {Component, Input} from "@angular/core";
 @Component({
     moduleId: module.id,
     selector: 'comment-list',
-    templateUrl: 'postCommentList.component.html',
-    styleUrls: [ 'postCommentList.component.css' ],
-    providers: [
-        Comment
-    ]
+    template: '<comment *ngFor="let comment of comments" [comment]="comment" class="comment-list-item"></comment>',
+    providers: [Comment]
 })
 export class PostCommentList {
     @Input() comments: Object[] = [];
-
-    showReply: boolean = false;
-
-    constructor() { }
-
-    reply(): void {
-        this.showReply = !this.showReply;
-    }
-
 }

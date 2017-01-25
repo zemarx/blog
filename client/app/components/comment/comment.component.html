@@ -1,10 +1,18 @@
-<div>
-    <div class="comment-author">{{comment.author}}</div>
-    •&nbsp;&nbsp;
-    <div class="comment-date">{{comment.date | date: "dd.MM.yy"}}</div>
+<div class="comment">
+    <div>
+        <div class="comment-author">{{comment.author}}</div>
+        •&nbsp;&nbsp;
+        <div class="comment-date">{{comment.date | date: "dd.MM.yy"}}</div>
+    </div>
+    <div class="comment-content">{{comment.content}}</div>
+
+    <div class="comment-reply">
+        <button type="button" (click)="reply()">Reply</button>
+        <textarea *ngIf="showReply" placeholder="Your reply..."></textarea>
+    </div>
+
+    <div *ngIf="comment.children" style="margin-left: 30px;">
+        <comment-list [comments]="comment.children">
+        </comment-list>
+    </div>
 </div>
-<div class="comment-content">{{comment.content}}</div>
-<button type="button" (click)="reply()">Reply</button>
-<textarea *ngIf="showReply">
-    Hello
-</textarea>
