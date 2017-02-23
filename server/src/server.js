@@ -1,4 +1,5 @@
 const express = require('express');
+const Router = express.Router;
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -51,3 +52,12 @@ console.log(path.relative(__dirname, '../client'));
 
 app.use('/api', postRoutes);
 app.use('/api', commentRoutes);
+
+
+const htmlIndexRouter = new Router();
+
+htmlIndexRouter.get('*', function (req, res) {
+    res.sendFile('index.html', {root: './../client'});
+});
+
+app.use(htmlIndexRouter);

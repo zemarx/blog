@@ -4,6 +4,8 @@ server/node_modules
 .DS_Store
 client/app/**/*.js
 client/app/**/*.js.map
+client/dist
 !client/app/util/apiCaller.js
 !client/app/util/dateLocal.js
 server/config/**/*.js
+npm-debug.log

@@ -1,24 +1,44 @@
-import {Component, Input} from "@angular/core";
-import {PostCommentList} from "../postCommentList/postCommentList.component";
+import {Component, Input, OnInit} from "@angular/core";
+import {Comment} from '../models/comment'
+import {Post} from "../models/post";
 
 @Component({
     moduleId: module.id,
     selector: 'comment',
     templateUrl: 'comment.component.html',
-    styleUrls: [ 'comment.component.css' ],
-    providers: [
-        PostCommentList
-    ]
+    styleUrls: [ 'comment.component.css' ]
 })
-export class Comment {
-    @Input() comment: Comment;
+export class CommentComponent implements OnInit {
+    @Input() private selectedPost: Post;
+    @Input() private comment: Comment;
 
-    showReply: boolean = false;
+    private commentReply: Comment = null;
+    private showReply: boolean = false;
 
     constructor() { }
 
-    reply(): void {
-        this.showReply = !this.showReply;
+    ngOnInit(): void {
+        // this.commentReply = new Comment('', this.selectedPost._id, this.comment._id, '', '', null, []);
     }
 
+    toggleReply(): void {
+        this.showReply = !this.showReply;
+
+        if (this.showReply) {
+            this.commentReply = new Comment('', this.selectedPost._id, this.comment._id, '', '', null, []);
+        }
+    }
+
+    submitReply(): void {
+        this.toggleReply();
+
+        this.commentReply._id = '1241';
+        this.commentReply.dateAdded = new Date();
+
+        // Clone comment object so that we break the reference to the current commentReply
+        let tmpCommentReply = JSON.parse(JSON.stringify(this.commentReply));
+        this.comment.children.push(tmpCommentReply);
+
+        this.commentReply = null;
+    }
 }

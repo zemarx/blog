@@ -23,11 +23,11 @@ export class CommentService {
 
     };
 
-    public addNewComment(postId: string, comment: Comment): Observable<any> {
+    public addNewComment(comment: Comment): Observable<any> {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.BASE_API_URL + `/comments?postId=${postId}`, {
+        return this.http.post(this.BASE_API_URL + `/comments?postId=${comment.postId}`, {
             comment: comment
         }, options)
             .map(res => res.json())
@@ -37,94 +37,119 @@ export class CommentService {
             });
     };
 
-    public getAllComments() : Object[] {
-        let comments: Object[] = [
+    public getPostComments(postId: string): Observable<any> {
+        return this.http.get(this.BASE_API_URL + `/comments?postId=${postId}`)
+            .map(res => res.json())
+            .catch(err => {
+                console.log(err);
+                return Observable.throw(err.json());
+            });
+    }
+
+    public getAllComments(postId: string): Array<Comment> {
+        let comments: Array<Comment> = [
             {
                 _id: '1',
-                author: 'Mark Piispanen',
+                postId: '1',
+                parentId: '',
+                authorName: 'Mark Piispanen',
                 content: 'The attacker has' +
                     'hijacked the connection and he or she is' +
                     'now able to intercept the data, alter data,' +
                     'add new data, or even prevent the data' +
                     'transfer to communicating parties',
-                date: new Date(),
+                dateAdded: new Date(),
                 children: [
                     {
                         _id: '2',
-                        author: 'Peter Parker',
+                        postId: '1',
+                        parentId: '1',
+                        authorName: 'Peter Parker',
                         content: 'The attacker has' +
                             'hijacked the connection and he or she is' +
                             'now able to intercept the data, alter data,' +
                             'add new data, or even prevent the data' +
                             'transfer to communicating parties',
-                        date: new Date(),
+                        dateAdded: new Date(),
                         children: null
                     },
                     {
                         _id: '3',
-                        author: 'Bruce Banner',
+                        postId: '1',
+                        parentId: '1',
+                        authorName: 'Bruce Banner',
                         content: 'The attacker has' +
                             'hijacked the connection and he or she is' +
                             'now able to intercept the data, alter data,' +
                             'add new data, or even prevent the data' +
                             'transfer to communicating parties',
-                        date: new Date(),
+                        dateAdded: new Date(),
                         children: null
                     },
                 ]
             },
             {
                 _id: '4',
-                author: 'James Bond',
+                postId: '1',
+                parentId: null,
+                authorName: 'James Bond',
                 content: 'The attacker has' +
                     'hijacked the connection and he or she is' +
                     'now able to intercept the data, alter data,' +
                     'add new data, or even prevent the data' +
                     'transfer to communicating parties',
-                date: new Date(),
+                dateAdded: new Date(),
                 children: null
             },
             {
                 _id: '5',
-                author: 'Bruce Wayne',
+                postId: '1',
+                parentId: null,
+                authorName: 'Bruce Wayne',
                 content: 'The attacker has' +
                     'hijacked the connection and he or she is' +
                     'now able to intercept the data, alter data,' +
                     'add new data, or even prevent the data' +
                     'transfer to communicating parties',
-                date: new Date(),
+                dateAdded: new Date(),
                 children: [
                     {
                         _id: '6',
-                        author: 'Barry Allen',
+                        postId: '1',
+                        parentId: '5',
+                        authorName: 'Barry Allen',
                         content: 'The attacker has' +
                             'hijacked the connection and he or she is' +
                             'now able to intercept the data, alter data,' +
                             'add new data, or even prevent the data' +
                             'transfer to communicating parties',
-                        date: new Date(),
+                        dateAdded: new Date(),
                         children: null
                     },
                     {
                         _id: '7',
-                        author: 'James Dean',
+                        postId: '1',
+                        parentId: '5',
+                        authorName: 'James Dean',
                         content: 'The attacker has' +
                             'hijacked the connection and he or she is' +
                             'now able to intercept the data, alter data,' +
                             'add new data, or even prevent the data' +
                             'transfer to communicating parties',
-                        date: new Date(),
+                        dateAdded: new Date(),
                         children: null
                     },
                     {
                         _id: '8',
-                        author: 'David Bowie',
+                        postId: '1',
+                        parentId: '5',
+                        authorName: 'David Bowie',
                         content: 'The attacker has' +
                             'hijacked the connection and he or she is' +
                             'now able to intercept the data, alter data,' +
                             'add new data, or even prevent the data' +
                             'transfer to communicating parties',
-                        date: new Date(),
+                        dateAdded: new Date(),
                         children: null
                     },
                 ]

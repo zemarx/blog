@@ -11,10 +11,8 @@ import {Router} from '@angular/router';
     styleUrls: [ 'addPost.component.css' ]
 })
 export class AddPostComponent implements OnInit {
-
-    submitted = false;
-    post: Post;
-    formActive = true;
+    private isFormSubmitted = false;
+    private post: Post;
 
     constructor(private location: Location,
                 private postService: PostService,
@@ -27,7 +25,7 @@ export class AddPostComponent implements OnInit {
     onSubmit() {
         //ask if user is sure to create post with these contents
 
-        this.submitted = true;
+        this.isFormSubmitted = true;
 
         //if form is valid continue
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, AfterViewInit} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Post} from "../models/post";
 import {PostService} from "../../services/post.service";
 import {SelectedPostService} from "../../services/selected-post.service";
@@ -10,7 +10,7 @@ import {SelectedPostService} from "../../services/selected-post.service";
     styleUrls: [ 'postList.component.css' ]
 })
 export class PostListComponent implements OnInit {
-    posts: Post[] = [];
+    private posts: Array<Post> = [];
 
     constructor(private postService: PostService,
                 private selectedPostService: SelectedPostService) { }
@@ -26,8 +26,7 @@ export class PostListComponent implements OnInit {
     getAllPosts(): any {
         this.postService.getAllPosts()
             .subscribe(
-                resData => this.posts = resData.posts
+                data => this.posts = data.posts
             );
     }
 }
-

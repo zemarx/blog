@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Comment } from '../models/comment'
-import {SelectedPostService} from "../../services/selected-post.service";
+import {Component, OnInit, Input} from '@angular/core';
+import {Comment} from '../models/comment'
 import {PlatformLocation} from "@angular/common";
 import {CommentService} from "../../services/comment.service";
-import {Router} from "@angular/router";
+import {Post} from "../models/post";
 
 @Component({
     moduleId: module.id,
@@ -12,20 +11,20 @@ import {Router} from "@angular/router";
     styleUrls: [ 'addPostComment.component.css' ]
 })
 export class AddPostComment implements OnInit {
+    @Input() private selectedPost: Post;
 
-    comment: Comment;
+    private comment: Comment;
 
-    constructor(private selectedPostService: SelectedPostService,
-                private commentService: CommentService,
+    constructor(private commentService: CommentService,
                 private platformLocation: PlatformLocation) { }
 
     ngOnInit(): void {
-        this.comment = new Comment(null, this.selectedPostService.getSelectedPost()._id , null,'','', null);
+        this.comment = new Comment('', this.selectedPost._id , '','','', null, []);
         console.log(window.location.origin);
     }
 
     onSubmit(): void {
-        this.commentService.addNewComment(this.selectedPostService.getSelectedPost()._id, this.comment)
+        this.commentService.addNewComment(this.comment)
             .subscribe(
                 res => {
                     console.log(JSON.stringify(res, null, 2));

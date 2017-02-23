@@ -17,10 +17,10 @@ import { routing } from './routes/app.routing';
 import {SelectedPostService} from '../services/selected-post.service';
 import {EditPostComponent} from './editPost/editPost.component';
 import {AddPostComment} from "./addPostComment/addPostComment.component";
-import {PostCommentList} from "./postCommentList/postCommentList.component";
+import {PostCommentListComponent} from "./postCommentList/postCommentList.component";
 import {CommentService} from "../services/comment.service";
-import {PostCommentWrapper} from "./postCommentList/postCommentWrapper.component";
-import {Comment} from "./comment/comment.component";
+import {PostCommentWrapperComponent} from "./postCommentList/postCommentWrapper.component";
+import {CommentComponent} from "./comment/comment.component";
 
 
 @NgModule({
@@ -37,9 +37,9 @@ import {Comment} from "./comment/comment.component";
         AddPostComponent,
         EditPostComponent,
         AddPostComment,
-        PostCommentList,
-        PostCommentWrapper,
-        Comment
+        PostCommentListComponent,
+        PostCommentWrapperComponent,
+        CommentComponent
     ],
     providers: [
         PostService,

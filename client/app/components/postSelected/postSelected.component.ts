@@ -5,10 +5,11 @@ import { SelectedPostService } from "../../services/selected-post.service";
 import { AuthService } from "../../services/auth.service";
 
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
 import {PostService} from "../../services/post.service";
-import {Router} from "@angular/router";
-import { AddPostComment } from '../addPostComment/addPostComment.component'
-import {PostCommentWrapper} from "../postCommentList/postCommentWrapper.component";
+import {Router, ActivatedRoute, Params} from "@angular/router";
+import {AddPostComment} from '../addPostComment/addPostComment.component'
+import {PostCommentWrapperComponent} from "../postCommentList/postCommentWrapper.component";
 
 @Component({
     moduleId: module.id,
@@ -18,21 +19,35 @@ import {PostCommentWrapper} from "../postCommentList/postCommentWrapper.componen
     providers: [
         AuthService,
         AddPostComment,
-        PostCommentWrapper
+        PostCommentWrapperComponent
     ]
 })
 export class PostSelectedComponent implements OnInit {
-
-    selectedPost: Post;
+    private selectedPost: Post = null;
 
     constructor(private location: Location,
                 private selectedPostService: SelectedPostService,
                 private authService: AuthService,
                 private postService: PostService,
+                private activatedRoute: ActivatedRoute,
                 private router: Router) { }
 
     ngOnInit(): void {
         this.selectedPost = this.selectedPostService.getSelectedPost();
+
+        // If selected post is not initialized, get it from the server by id from url parameter
+        if (this.selectedPost === null || !this.selectedPost) {
+            this.activatedRoute.params
+                .map((params: Params) => params['_id'])
+                .subscribe((id) => {
+                    this.postService
+                        .getPost(id)
+                        .subscribe(data => {
+                            this.selectedPost = data.post;
+                            this.selectedPostService.setSelectedPost(data.post);
+                        });
+                });
+        }
     }
 
     goBack(): void {
@@ -42,19 +57,14 @@ export class PostSelectedComponent implements OnInit {
     deletePost(): void {
         let deletePostConfirm = confirm("Вы уверены что хотите удалить этот пост?");
 
-        if (!deletePostConfirm) {
-            return;
-        }
+        if (!deletePostConfirm) return;
 
         this.postService.deletePost(this.selectedPost._id)
             .subscribe(
                 () => {
-                    //console.log(JSON.stringify(res, null, 2));
                     this.selectedPostService.setSelectedPost(null);
                     this.router.navigate(['/postlist']);
                 }
             );
     }
-
-
 }

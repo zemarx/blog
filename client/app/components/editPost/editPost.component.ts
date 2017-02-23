@@ -3,7 +3,9 @@ import {Location} from '@angular/common';
 import {Post} from "../models/post";
 import {SelectedPostService} from "../../services/selected-post.service";
 import {PostService} from "../../services/post.service";
-import {Router} from "@angular/router";
+import {Router, ActivatedRoute, Params} from "@angular/router";
+import 'rxjs/add/operator/switchMap';
+
 
 @Component({
     moduleId: module.id,
@@ -12,16 +14,30 @@ import {Router} from "@angular/router";
     styleUrls: [ 'editPost.component.css' ]
 })
 export class EditPostComponent implements OnInit {
-
-    private selectedPost: Post;
+    private selectedPost: Post = null;
 
     constructor(private location: Location,
                 private selectedPostService: SelectedPostService,
                 private postService: PostService,
+                private activatedRoute: ActivatedRoute,
                 private router: Router) { }
 
     ngOnInit() {
         this.selectedPost = this.selectedPostService.getSelectedPost();
+
+        // If selected post is not initialized, get it from the server by id from url parameter
+        if (this.selectedPost === null || !this.selectedPost) {
+            this.activatedRoute.params
+                .map((params: Params) => params['_id'])
+                .subscribe((id) => {
+                    this.postService
+                        .getPost(id)
+                        .subscribe(data => {
+                            this.selectedPost = data.post;
+                            this.selectedPostService.setSelectedPost(data.post);
+                        });
+                });
+        }
     }
 
     onSubmit() {

@@ -15,7 +15,7 @@ export class PostService {
     // this.platformLocation.location.origin + '/api'
 
     // BASE_API_URL: string = window.location.origin + '/api';
-    BASE_API_URL: string = 'http://localhost:3000' + '/api';
+    BASE_API_URL: string = 'http://localhost:3000/api';
 
     constructor(private http: Http,
                 private platformLocation: PlatformLocation) { };
@@ -65,4 +65,12 @@ export class PostService {
                 return Observable.throw(err.json());
             });
     };
+
+    public getPost(id: string): Observable<any> {
+        return this.http.get(this.BASE_API_URL + '/posts/' + id)
+            .map(res => res.json())
+            .catch(err => {
+                return Observable.throw(err.json());
+            });
+    }
 }
