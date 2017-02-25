@@ -45,19 +45,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static('./../client')); //'/' + path.relative(__dirname, '../client')));
 app.use('/', express.static('./../client')); //'/' + path.relative(__dirname, '../client')));
 
-console.log(path.relative(__dirname, '../client'));
-
 // app.use(express.static('/Users/lagorithm/workspace/angular_projects/blog_final/client'));
 // app.use('/', express.static('/Users/lagorithm/workspace/angular_projects/blog_final/client'));
 
 app.use('/api', postRoutes);
 app.use('/api', commentRoutes);
 
-
 const htmlIndexRouter = new Router();
 
 htmlIndexRouter.get('*', function (req, res) {
-    res.sendFile('index.html', {root: './../client'});
+    res.sendFile('index.html', {root: '/Users/lagorithm/tmp/blog_webpack/src/index.html'});
 });
 
 app.use(htmlIndexRouter);
