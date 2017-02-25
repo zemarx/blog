@@ -1,11 +1,11 @@
 client/node_modules
 server/node_modules
 .idea
+.vscode/
 .DS_Store
-client/app/**/*.js
-client/app/**/*.js.map
+client/src/**/*.js
+client/src/**/*.js.map
 client/dist
-!client/app/util/apiCaller.js
-!client/app/util/dateLocal.js
 server/config/**/*.js
 npm-debug.log
+server/dist/server-bundle.js
