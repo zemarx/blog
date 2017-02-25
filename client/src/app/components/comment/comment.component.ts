@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Comment} from '../../models/comment.model'
 import {Post} from "../../models/post.model";
+import {CommentService} from "../../services/comment.service";
 
 @Component({
     selector: 'comment',
@@ -14,11 +15,9 @@ export class CommentComponent implements OnInit {
     private commentReply: Comment = null;
     private showReply: boolean = false;
 
-    constructor() { }
+    constructor(private commentService: CommentService) { }
 
-    ngOnInit(): void {
-        // this.commentReply = new Comment('', this.selectedPost._id, this.comment._id, '', '', null, []);
-    }
+    ngOnInit(): void { }
 
     toggleReply(): void {
         this.showReply = !this.showReply;
@@ -31,13 +30,11 @@ export class CommentComponent implements OnInit {
     submitReply(): void {
         this.toggleReply();
 
-        this.commentReply._id = '1241';
-        this.commentReply.dateAdded = new Date();
-
-        // Clone comment object so that we break the reference to the current commentReply
-        let tmpCommentReply = JSON.parse(JSON.stringify(this.commentReply));
-        this.comment.children.push(tmpCommentReply);
-
-        this.commentReply = null;
+        this.commentService.addNewComment(this.commentReply)
+            .subscribe(res => {
+                let comment = res;
+                this.comment.children.push(comment);
+                this.commentReply = null;
+            });
     }
 }

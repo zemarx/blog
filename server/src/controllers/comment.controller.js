@@ -3,14 +3,14 @@ import logger from '../utils/logger';
 import getFullUrl from '../utils/full-url';
 import sanitize from 'sanitize-html';
 
-let ObjectId = require('mongodb').ObjectID;
+const makeTree = require('../utils/makeTree');
 
+const ObjectId = require('mongodb').ObjectID;
 
 
 // Save comment with particular post id
 export function addComment(req, res) {
     logger.debug(`Requested to save comment: ${req.body.comment} from : ${getFullUrl(req)}`);
-    // logger.debug(`Comments postId: ${req.query.postId}`);
 
     let postId = sanitize(req.body.comment.postId);
     let parentId = sanitize(req.body.comment.parentId);
@@ -19,11 +19,12 @@ export function addComment(req, res) {
 
     req.db.collection('comments').insert({
         _id: new ObjectId(),
-        postId: postId ? new ObjectId(postId) : null,
-        parentId: (parentId === 'null' || parentId === null) ? null : parentId,
+        postId: (postId !== '' && postId !== null && postId !== 'null') ? new ObjectId(postId) : null,
+        parentId: (parentId !== '' || parentId !== null || parentId !== 'null') ? parentId : null,
         authorName: authorName,
         content: content,
-        dateAdded: new Date()
+        dateAdded: new Date(),
+        children: []
     }, function(err, results) {
         if (err) {
             res.status(500).send(err);
@@ -36,22 +37,20 @@ export function addComment(req, res) {
 }
 
 // Get all comments for particular post
+// Mongo query returns a flat tree, so using function makeTree(), comment tree is constructed
 export function getComments(req, res) {
     logger.info(`Requested all comments from: ${getFullUrl(req)}`);
     logger.debug(`Comments postId: ${req.query.postId}`);
 
-    req.db.collection('comments').find({ postId: new ObjectId(req.query.postId) }, function(err, posts) {
+    req.db.collection('comments').find({ postId: new ObjectId(req.query.postId) }).toArray(function(err, comments) {
         if (err) {
             res.status(500).send(err);
             return;
         }
 
+        let commentTree = makeTree(comments);
 
-        // TODO: make comment tree
-        // ...
-        let commentTree = {};
-
-        res.json(commentTree);
+        res.json(commentTree)
     });
 }
 

@@ -9,10 +9,10 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class CommentService {
 
-    // BASE_API_URL: string = 'http://localhost:3000/api';
+    BASE_API_URL: string = 'http://localhost:3000/api';
     // this.platformLocation.location.origin + '/api'
 
-    BASE_API_URL: string = window.location.origin + '/api';
+    // BASE_API_URL: string = window.location.origin + '/api';
 
     constructor(private http: Http) { };
 
@@ -27,7 +27,7 @@ export class CommentService {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
-        return this.http.post(this.BASE_API_URL + `/comments?postId=${comment.postId}`, {
+        return this.http.post(this.BASE_API_URL + `/comments?`, {
             comment: comment
         }, options)
             .map(res => res.json())

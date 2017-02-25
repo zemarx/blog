@@ -21,11 +21,13 @@ export class AddPostCommentComponent implements OnInit {
 
     onSubmit(): void {
         this.commentService.addNewComment(this.comment)
-            .subscribe(
-                res => {
-                    // TODO: maybe a notification????
-                    console.log(JSON.stringify(res, null, 2));
-                }
-            );
+            .subscribe(res => {
+                let comment = res;
+
+                // push this comment to the main comments of post
+                // At the moment, you have to update the page so that you can see top level comments updated
+
+                console.log(JSON.stringify(comment, null, 2));
+            });
     }
 }

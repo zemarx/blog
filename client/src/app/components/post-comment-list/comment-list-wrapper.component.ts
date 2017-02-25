@@ -24,5 +24,13 @@ export class CommentListWrapperComponent implements OnInit {
 
     getAllComments(): void {
         this.comments = this.commentService.getAllComments(this.selectedPost._id);
+
+        this.commentService.getPostComments(this.selectedPost._id)
+            .subscribe(
+                res => {
+                    let postComments = res;
+                    this.comments = postComments;
+                }
+            )
     }
 }
