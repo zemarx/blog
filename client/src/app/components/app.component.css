@@ -1,6 +1,7 @@
 header {
     width: 100%;
-    background-color: #222222;
+    height: fit-content;
+    background-color: #2e6171;
     margin-top: 0;
     padding-top: 0;
 
@@ -15,18 +16,20 @@ header {
 
 .nav li {
     list-style: none;
-    font-size: 30px;
     margin: 15px 0 15px 15px;
+    align-self: center;
 }
 
 .nav a {
+    font-size: 30px;    
     padding: 10px;
     color: #ffffff;
 }
 
 .nav a:hover {
+    /*background-color: #356675;*/
     color: #ffffff;
-    border: 2px solid white;
+    /*border: 2px solid white;*/
 }
 
 .nav a::selection {

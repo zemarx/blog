@@ -1,22 +1,22 @@
 <div class="add-comment">
     <form (ngSubmit)="onSubmit()" #commentForm="ngForm">
+        <textarea type="text"
+                  id="add-comment-content"
+                  required
+                  [(ngModel)]="comment.content"
+                  name="content"
+                  placeholder="What do you think?"
+                  #content="ngModel"
+                  rows="4"
+                  cols="30">
+        </textarea>
+
         <input type="text" id="add-comment-author-name"
                required
                [(ngModel)]="comment.authorName"
                name="authorName"
                placeholder="Your name"
                #authorName="ngModel">
-        <br>
-        <textarea type="text" id="add-comment-content"
-                  required
-                  [(ngModel)]="comment.content"
-                  name="content"
-                  placeholder="Write your comment..."
-                  #content="ngModel"
-                  rows="4"
-                  cols="30">
-        </textarea>
-        <br>
-        <button type="submit">Add comment</button>
+        <button md-button type="submit">Add comment</button>
     </form>
 </div>

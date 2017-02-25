@@ -2,6 +2,7 @@ import {NgModule, ApplicationRef} from '@angular/core';
 import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
+import {MaterialModule} from '@angular/material';
 import {removeNgStyles, createNewHosts} from '@angularclass/hmr';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 
@@ -24,11 +25,12 @@ import { AuthGuard } from './utils/auth.guard';
 import { routing } from './routes/app.routing';
 
 @NgModule({
-    imports: [
+    imports: [        
         BrowserModule,
         HttpModule,
-        routing,
-        FormsModule
+        FormsModule,        
+        MaterialModule.forRoot(),
+        routing
     ],
     declarations: [
         AppComponent,

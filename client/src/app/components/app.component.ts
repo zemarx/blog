@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+// import '../../../public/css/styles.css';
 
 @Component({
     selector: 'root',
@@ -9,14 +10,13 @@ import { AuthService } from '../services/auth.service';
         <header>
             <nav>
                 <ul class="nav">
-                    <li><a routerLink="/postlist">All posts</a></li>
-                    <li><a routerLink="/addpost" *ngIf="authService.authenticated()">Add new post</a></li>
+                    <li><a md-button routerLink="/postlist">All posts</a></li>
+                    <li><a md-button routerLink="/addpost" *ngIf="authService.authenticated()">Add new post</a></li>
                 </ul>
             </nav>
             <div class="login">
-                <button id="login-btn" (click)="authService.login()" *ngIf="!authService.authenticated()">Login</button>
-                <button id="logout-btn" (click)="authService.logout()" *ngIf="authService.authenticated()">Logout</button>
-                <!--<button id="show-data" (click)="showData()">Show user data</button>-->
+                <button md-button id="login-btn" (click)="authService.login()" *ngIf="!authService.authenticated()">Login</button>
+                <button md-button id="logout-btn" (click)="authService.logout()" *ngIf="authService.authenticated()">Logout</button>
                 <!--<h1 id="main-title">{{title}}</h1>-->
             </div>
         </header>
