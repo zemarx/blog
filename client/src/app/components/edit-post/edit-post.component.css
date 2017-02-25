@@ -1,0 +1,27 @@
+.edit-post > h1 {
+    margin-left: 100px;
+}
+
+.edit-post > button {
+    margin-left: 100px;
+}
+
+.edit-post form {
+    margin-left: 100px;
+}
+
+.edit-post form > div {
+    margin-top: 20px;
+}
+
+.edit-post-title input {
+    width: 350px;
+}
+
+.edit-post-author-name input {
+    width: 150px;
+}
+
+.edit-post-content textarea {
+    width: 70%;
+}

@@ -1,0 +1,38 @@
+<div class="add-post">
+    <h1>Add new post</h1>
+    <form (ngSubmit)="onSubmit()" #postForm="ngForm">
+        <div class="add-post-title">
+            <label for="add-post-title">Title</label><br>
+            <input type="text" id="add-post-title"
+                   required
+                   [(ngModel)]="post.title"
+                   name="title"
+                   #title="ngModel">
+        </div>
+
+        <div class="add-post-author-name">
+            <label for="add-post-author-name">Author</label><br>
+            <input type="text" id="add-post-author-name"
+                   required
+                   [(ngModel)]="post.authorName"
+                   name="authorName"
+                   #authorName="ngModel">
+        </div>
+
+        <div class="add-post-content">
+            <label for="add-post-content">Content</label><br>
+            <textarea type="text" id="add-post-content"
+                      required
+                      [(ngModel)]="post.content"
+                      name="content"
+                      #content="ngModel"
+                      rows="20"
+                      cols="100">
+            </textarea>
+        </div>
+
+        <button type="submit">Confirm</button>
+    </form>
+
+    <button id="back-button" (click)="goBack()">Cancel</button>
+</div>

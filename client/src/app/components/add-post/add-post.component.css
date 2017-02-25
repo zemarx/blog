@@ -1,0 +1,27 @@
+.add-post > h1 {
+    margin-left: 100px;
+}
+
+.add-post > button {
+    margin-left: 100px;
+}
+
+.add-post form {
+    margin-left: 100px;
+}
+
+.add-post form > div {
+    margin-top: 15px;
+}
+
+.add-post-title input {
+    width: 350px;
+}
+
+.add-post-author-name input {
+    width: 150px;
+}
+
+.add-post-content textarea {
+    width: 70%;
+}
