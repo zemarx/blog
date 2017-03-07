@@ -2,7 +2,7 @@
 .vscode/
 .DS_Store
 
-server/src/config/
+server/src/config/config.ts
 server/src/**/*.js
 server/node_modules
 server/dist/
