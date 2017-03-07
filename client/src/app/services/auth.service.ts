@@ -16,6 +16,7 @@ export class AuthService {
     constructor(private router: Router) {
         // Add callback for lock `authenticated` event
         this.lock.on('authenticated', (authResult: any) => {
+            console.log(authResult.idToken);
             localStorage.setItem('id_token', authResult.idToken);
 
             this.lock.getProfile(authResult.idToken, (error: any, profile: any) => {

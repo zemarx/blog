@@ -35,15 +35,14 @@ export class PostSelectedComponent implements OnInit {
         this.selectedPost = this.selectedPostService.getSelectedPost();
 
         // If selected post is not initialized, get it from the server by id from url parameter
-        if (this.selectedPost === null || !this.selectedPost) {
+        if (this.selectedPost === null || this.selectedPost === undefined || !this.selectedPost) {
             this.activatedRoute.params
                 .map((params: Params) => params['_id'])
                 .subscribe((id) => {
-                    this.postService
-                        .getPost(id)
+                    this.postService.getPost(id)
                         .subscribe(data => {
-                            this.selectedPost = data.post;
-                            this.selectedPostService.setSelectedPost(data.post);
+                            this.selectedPost = data;
+                            this.selectedPostService.setSelectedPost(data);
                         });
                 });
         }

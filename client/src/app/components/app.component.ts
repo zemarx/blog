@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../services/auth.service';
-// import '../../../public/css/styles.css';
+
 
 @Component({
     selector: 'root',
     template: `
-    <!--suppress ALL -->
     <div class="main-content">
         <header>
             <nav>

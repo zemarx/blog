@@ -4,6 +4,7 @@ import {Post} from "../../models/post.model";
 import {PostService} from "../../services/post.service";
 import {Router} from '@angular/router';
 
+
 @Component({
     selector: 'post-add',
     templateUrl: 'add-post.component.html',
@@ -21,20 +22,15 @@ export class AddPostComponent implements OnInit {
         this.post = new Post(null, '', '', '', new Date());
     }
 
-    onSubmit() {
-        //ask if user is sure to create post with these contents
+    handleEditorKeyUp (editorContent) {
+        console.log(JSON.stringify(editorContent, null, 2));
+    }
 
+    onSubmit() {
         this.isFormSubmitted = true;
 
-        //if form is valid continue
-
         this.postService.addNewPost(this.post)
-            .subscribe(
-                res => {
-                    console.log(JSON.stringify(res, null, 2));
-                    this.router.navigate(['/postlist']);
-                }
-            );
+            .subscribe(res => this.router.navigate(['/postlist']) );
     }
 
     goBack(): void {

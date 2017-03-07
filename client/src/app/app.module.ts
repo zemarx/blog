@@ -3,6 +3,7 @@ import {HttpModule} from '@angular/http';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
 import {MaterialModule} from '@angular/material';
+
 import {removeNgStyles, createNewHosts} from '@angularclass/hmr';
 import {AUTH_PROVIDERS} from 'angular2-jwt';
 
@@ -15,6 +16,9 @@ import {AddPostCommentComponent} from './components/add-post-comment/add-post-co
 import {CommentComponent} from './components/comment/comment.component';
 import {CommentListComponent} from './components/post-comment-list/comment-list.component';
 import {CommentListWrapperComponent} from './components/post-comment-list/comment-list-wrapper.component';
+
+// Tinymce
+import {SimpleTinyComponent} from './components/tinymce-editor/tinymce-editor.component';
 
 import {AuthService} from './services/auth.service';
 import {PostService} from './services/post.service';
@@ -41,7 +45,9 @@ import { routing } from './routes/app.routing';
         AddPostCommentComponent,
         CommentComponent,
         CommentListComponent,
-        CommentListWrapperComponent
+        CommentListWrapperComponent,
+
+        SimpleTinyComponent
     ],
     providers: [
         AuthService,

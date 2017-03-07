@@ -22,7 +22,7 @@ export class PostService {
 
     public deletePost(id: string): Observable<any> {
         return this.http.delete(this.BASE_API_URL + '/posts/' + id)
-            .map(res => res.json)
+            .map(res => res.json())
             .catch(err => {
                 console.log(err);
                 return Observable.throw(err.json());
@@ -38,8 +38,7 @@ export class PostService {
         }, options)
             .map(res => res.json())
             .catch(err => {
-                console.log(err);
-                return Observable.throw(err.json());
+                return Observable.throw(err);
             });
     };
 

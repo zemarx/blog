@@ -4,6 +4,6 @@
         <span class="post-list-item-name">{{post.authorName}}</span>
         <span class="post-list-item-date">{{post.dateAdded | date}}</span><br>
         <span class="post-list-item-content">{{post.content.slice(0, 400)}}...</span><br><br>
-        <a class="post-list-item-link" [routerLink]="['/post', post._id]" (click)="setSelectedPost(post)">Continue reading...</a>
+        <a md-raised-button class="post-list-item-link" [routerLink]="['/post', post._id]" (click)="setSelectedPost(post)">Continue reading...</a>
     </li>
 </ul>

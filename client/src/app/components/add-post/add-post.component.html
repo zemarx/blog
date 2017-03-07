@@ -21,14 +21,20 @@
 
         <div class="add-post-content">
             <label for="add-post-content">Content</label><br>
-            <textarea type="text" id="add-post-content"
+            <tinymce-editor id="editor"
+                    [elementId]="'add-post-editor-content'"
+                    (onEditorKeyup)="handleEditorKeyUp($event)">
+            </tinymce-editor>
+
+            
+            <!--<textarea type="text" id="add-post-content"
                       required
                       [(ngModel)]="post.content"
                       name="content"
                       #content="ngModel"
                       rows="20"
                       cols="100">
-            </textarea>
+            </textarea>-->
         </div>
 
         <button type="submit">Confirm</button>

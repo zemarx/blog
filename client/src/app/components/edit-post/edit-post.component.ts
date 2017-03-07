@@ -52,7 +52,9 @@ export class EditPostComponent implements OnInit {
 
         this.postService.updatePost(updatedPost._id, updatedPost)
             .subscribe(
-                () => {
+                (res) => {
+                    // TODO: do something with response???!?!?!?
+                    console.log(JSON.stringify(res, null, 2));
                     this.selectedPostService.setSelectedPost(null);
                     this.router.navigate(['/postlist']);
                 }

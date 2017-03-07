@@ -1,5 +1,5 @@
+import {Comment} from './../../models/comment.model';
 import {Component, OnInit, Input} from '@angular/core';
-import {Comment} from '../../models/comment.model';
 import {Post} from "../../models/post.model";
 import {CommentService} from "../../services/comment.service";
 
@@ -10,6 +10,7 @@ import {CommentService} from "../../services/comment.service";
 })
 export class AddPostCommentComponent implements OnInit {
     @Input() private selectedPost: Post;
+    @Input() comments: Array<Comment>;
 
     private comment: Comment;
 
@@ -23,11 +24,8 @@ export class AddPostCommentComponent implements OnInit {
         this.commentService.addNewComment(this.comment)
             .subscribe(res => {
                 let comment = res;
-
-                // push this comment to the main comments of post
-                // At the moment, you have to update the page so that you can see top level comments updated
-
-                console.log(JSON.stringify(comment, null, 2));
+                this.comments.push(comment);
+                this.comment = new Comment(null, this.selectedPost._id , '','','', null, []);
             });
     }
 }

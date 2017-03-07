@@ -1,12 +1,12 @@
 
 //--------------------DATABASE------------------------------
 
-        _____________PROBABLY IS NOT NEEDED BECAUSE OF AUTH0___
-        |=User                                                 |
-        |    -userId                                           |
-        |    -username                                         |
-        |    -persmissions = "admin|user|..."                  |
-        --------------------------------------------------------
+    _____________PROBABLY IS NOT NEEDED BECAUSE OF AUTH0___
+    |=User                                                 |
+    |    -userId                                           |
+    |    -username                                         |
+    |    -persmissions = "admin|user|..."                  |
+    --------------------------------------------------------
 
 
 =Post
@@ -40,9 +40,6 @@ COMMENTS:
     TODO: ????
 
 
-
-
-
 //--------------------FUNCTIONALITY--------------------------
 
 TODO: MAKE POST FILTER BY YEAR OR MONTH
@@ -73,3 +70,15 @@ TODO: CREATE POST STYLES
 22.02.17 -> 3,5 h
 
 24.02.17 -> 2 h
+
+25.02.17 -> 3h
+
+26.02.17 -> 3h
+
+28.02.17 -> 2h
+
+05.03.17 -> 1,5 h
+
+06.03.17 -> 0,5 h
+
+07.03.17 -> 2,5 h

@@ -6,7 +6,12 @@ import {Comment} from "../../models/comment.model";
 
 @Component({
     selector: 'comment-list-wrapper',
-    template: '<comment-list class="comment-list-wrapper" [comments]="comments" [selectedPost]="selectedPost"></comment-list>',
+    template: `
+        <div>
+            <comment-list class="comment-list-wrapper" [comments]="comments" [selectedPost]="selectedPost">
+            </comment-list>
+            <add-comment *ngIf="selectedPost" [selectedPost]="selectedPost" [comments]="comments"></add-comment>
+        </div>`,
     providers: [
         CommentListComponent
     ]
@@ -23,7 +28,7 @@ export class CommentListWrapperComponent implements OnInit {
     }
 
     getAllComments(): void {
-        this.comments = this.commentService.getAllComments(this.selectedPost._id);
+        // this.comments = this.commentService.getAllComments(this.selectedPost._id);
 
         this.commentService.getPostComments(this.selectedPost._id)
             .subscribe(
