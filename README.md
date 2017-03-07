@@ -1,5 +1,5 @@
 ## Blog
-Blog made with Node.js, Express.js, Angular2 and Auth0
+Blog made with Node.js, Koa, Angular2 and Auth0
 
 ## Server setup
 You need to get url to mongodb database
