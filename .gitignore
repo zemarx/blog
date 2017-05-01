@@ -1,6 +1,7 @@
 .idea
 .vscode/
 .DS_Store
+npm-debug.log
 
 server/src/config/config.ts
 server/src/**/*.js
@@ -8,13 +9,8 @@ server/node_modules
 server/dist/
 
 client/node_modules
-client/src/**/*.js
-client/src/**/*.js.map
 client/dist
-!client/src/assets/langs/ru.js
 
 client_old/
 
 scripts/
-
-npm-debug.log

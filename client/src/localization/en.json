@@ -1,0 +1,20 @@
+{
+  "lang": "English",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "createPost": "Create Post",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
+  },
+  "createEditPost": {
+    "createNewPost": "Create new post",
+    "editPost": "Edit post",
+    "authorName": "Author name",
+    "title": "Title"
+  },
+  "home": {
+    "readMore": "Read more"
+  },
+  "hello": "Hello friend!"
+}

@@ -1,0 +1,20 @@
+{
+  "lang": "Русский",
+  "nav": {
+    "home": "Главная",
+    "about": "О блоге",
+    "createPost": "Создать пост",
+    "signIn": "Войти",
+    "signOut": "Выйти"
+  },
+  "createEditPost": {
+    "createNewPost": "Создать новый пост",
+    "editPost": "Редактировать пост",
+    "authorName": "Имя автора",
+    "title": "Заголовок"
+  },
+  "home": {
+    "readMore": "Читать больше"
+  },
+  "hello": "Привет друг!"
+}
