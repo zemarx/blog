@@ -9,7 +9,7 @@ const router = new Router({ prefix: '/api'});
 // Get all comments for particular post(post id comes in url params)
 router.get('/comments', async (ctx, next) => {
     try {
-        ctx.body = await commentService.getPostComments(ctx.query.postId);
+        ctx.body = await commentService.getPostComments(ctx.query.post_id);
     } catch (err) {
         // TODO: send error object to client
         console.log(err);

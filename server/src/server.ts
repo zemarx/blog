@@ -3,6 +3,7 @@
 import * as Koa from 'koa';
 import postRoutes from './routes/post.routes';
 import commentRoutes from './routes/comment.routes';
+import userRoutes from './routes/user.routes';
 import config from './config/config';
 import DatabaseService from './services/database.service';
 
@@ -29,6 +30,7 @@ app.use(cors());
 app.use(bodyparser());
 app.use(postRoutes.routes());
 app.use(commentRoutes.routes());
+app.use(userRoutes.routes());
 
 app.use(serve(clientIndexPath));
 app.use(async ctx => {

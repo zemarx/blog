@@ -23,6 +23,7 @@ import 'rxjs/add/operator/toPromise';
 })
 export class PostSelectedComponent implements OnInit {
     private selectedPost: Post = null;
+    private isAuthenticated: boolean = false;
 
     constructor(private location: Location,
                 private selectedPostService: SelectedPostService,
@@ -32,6 +33,8 @@ export class PostSelectedComponent implements OnInit {
                 private router: Router) { }
 
     ngOnInit(): void {
+        this.isAuthenticated = this.authService.isAuthenticated();
+
         this.selectedPost = this.selectedPostService.getSelectedPost();
 
         // If selected post is not initialized, get it from the server by id from url parameter
@@ -50,6 +53,10 @@ export class PostSelectedComponent implements OnInit {
 
     goBack(): void {
         this.location.back();
+    }
+
+    editPost(): void {
+        this.router.navigate(['/editpost', this.selectedPost._id]);
     }
 
     deletePost(): void {

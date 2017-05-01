@@ -7,9 +7,11 @@
         </div>
         <div id="content">{{selectedPost.content}}</div>
         <div class="post-actions">
-            <a class="link-as-button" id="edit-post-link" [routerLink]="['/editpost', selectedPost._id]" *ngIf="authService.authenticated()">Edit current post</a>
-            <button id="delete-post-button" (click)="deletePost()" *ngIf="authService.authenticated()">Delete current post</button>
-            <!--<button id="back-button" (click)="goBack()">Go back</button>-->
+            <!--<a class="link-as-button" id="edit-post-link" [routerLink]="['/editpost', selectedPost._id]" *ngIf="isAuthenticated">Edit current post</a>-->
+
+
+            <button md-raised-button id="edit-post-button" (click)="editPost()" *ngIf="isAuthenticated">Edit current post</button>            
+            <button md-raised-button id="delete-post-button" (click)="deletePost()" *ngIf="isAuthenticated">Delete current post</button>
         </div>
     </section>
 

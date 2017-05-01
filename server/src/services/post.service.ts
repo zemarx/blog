@@ -9,13 +9,13 @@ export default class PostService {
 
     // Returns an array of posts
     public async getAllPosts() {
-        return await db.connection().collection('posts').find({}).toArray();
+        return await db.connection().collection('posts').find({ is_archived: false }).toArray();
     }
 
 
     // Returns created post
     public async addNewPost(post) {
-        if (!post.content || !post.title || !post.authorName) {
+        if (!post.content || !post.title || !post.author_name) {
             return;
         }
 
@@ -23,10 +23,12 @@ export default class PostService {
             .collection('posts')
             .insert({
                 _id: new ObjectId(),
-                authorName: post.authorName,
+                author_name: post.author_name,
                 title: post.title,
+                is_archived: false,
                 content: post.content,
-                dateAdded: new Date()
+                last_time_edited: null,
+                date_created: new Date()
             });
 
         return results.ops;
@@ -35,7 +37,7 @@ export default class PostService {
 
     // Returns an updated post object and status text
     public async updatePost(id: string, post) {
-        if (!post.content || !post.title || !post.authorName) {
+        if (!post.content || !post.title || !post.author_name) {
             return;
         }
 
@@ -51,7 +53,8 @@ export default class PostService {
                     $set: {
                         content: post.content,
                         title: post.title,
-                        authorName: post.authorName
+                        author_name: post.author_name,
+                        last_time_edited: new Date()
                     }
                 });
 
@@ -80,6 +83,9 @@ export default class PostService {
 
 
     // Deleted post and returns status text
+
+    // TODO: deletion actually will make the post archived, so that is can be later restored if necessary
+
     public async deletePost(id: string) {
         let results = await db.connection().collection('posts').removeOne({ _id: new ObjectId(id) });
 

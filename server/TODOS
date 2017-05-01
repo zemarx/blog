@@ -3,26 +3,27 @@
 
     _____________PROBABLY IS NOT NEEDED BECAUSE OF AUTH0___
     |=User                                                 |
-    |    -userId                                           |
+    |    -user_id                                           |
     |    -username                                         |
     |    -persmissions = "admin|user|..."                  |
     --------------------------------------------------------
 
 
 =Post
-    -postId
-    -authorName
+    -id
+    -author_name
     -title
     -content
-    -dateAdded
+    -last_time_edited
+    -date_created
 
 =Comment
-    -commentId
-    -postId(ref -> Post)
-    -parentId(ref -> Comment)
-    -commentAuthor
+    -id
+    -post_id(id -> Post)
+    -parent_id(id -> Comment)
+    -author_name
     -content
-    -dateAdded
+    -date_created
 
 //--------------------DATABASE FUNCTIONS---------------------
 
@@ -42,17 +43,25 @@ COMMENTS:
 
 //--------------------FUNCTIONALITY--------------------------
 
+TODO: Maybe a propery like "SHOW THIS POST"/"MAKE VISIBLE", so that author can hide chosen posts from users ?????
+
+TODO: deletion actually will make the post archived, so that is can be later restored if necessary
+
+TODO: ADD 'LAST EDITED' PROPERTY TO POST ------->>> DONE
+
+TODO: ADD ABILITY TO REMOVE COMMENTS AS ADMIN(LOGGED IN)
+
 TODO: MAKE POST FILTER BY YEAR OR MONTH
+
+TODO: PAGES!?
 
 DONE: CAN UPDATE SELECTED POST
 
 DONE: MOVE "DELETE POST" TO SELECTED POST
 
-TODO: MAKE COMMENTS
+DONE: MAKE COMMENTS
 
 DONE: MAKE LOGIN AND (MAYBE REGISTRATION) #Update: made with Auth0
-
-TODO: PAGES!
 
 
 //----------------------STYLES--------------------------------
@@ -63,6 +72,8 @@ TODO: POSTLIST STYLES
 TODO: SELECTED POST STYLES
 
 TODO: CREATE POST STYLES
+
+TODO: COMMENTS STYLES
 
 
 //-----------------TIME SPENT-----------------------------------
@@ -82,3 +93,9 @@ TODO: CREATE POST STYLES
 06.03.17 -> 0,5 h
 
 07.03.17 -> 2,5 h
+
+18.03.17. -> 2,5 h
+
+20.04.17 -> 1,5 h
+
+24.04.17 -> 2 h

@@ -9,11 +9,11 @@ export default class CommentService {
     constructor() {}
 
     // Get all comments of a post with 'postId'
-    public async getPostComments(postId: string) {
+    public async getPostComments(post_id: string) {
         let comments = await dbService
             .connection()
             .collection('comments')
-            .find({ postId: new ObjectId(postId) })
+            .find({ postId: new ObjectId(post_id) })
             .toArray();
 
         // Create a json tree object from adjacent list of comments
@@ -24,9 +24,9 @@ export default class CommentService {
 
     // Add new comment to a particular post
     public async addNewComment(comment) {
-        let postId = (comment.postId);
-        let parentId = (comment.parentId);
-        let authorName = (comment.authorName);
+        let post_id = (comment.post_id);
+        let parent_id = (comment.parent_id);
+        let author_name = (comment.author_name);
         let content = (comment.content);
 
         let results = await dbService
@@ -34,9 +34,9 @@ export default class CommentService {
             .collection('comments')
             .insert({
                 _id: new ObjectId(),
-                postId: (postId !== '' && postId !== null && postId !== 'null') ? new ObjectId(postId) : null,
-                parentId: (parentId !== '' || parentId !== null || parentId !== 'null') ? parentId : null,
-                authorName: authorName,
+                postId: (post_id !== '' && post_id !== null && post_id !== 'null') ? new ObjectId(post_id) : null,
+                parentId: (parent_id !== '' || parent_id !== null || parent_id !== 'null') ? parent_id : null,
+                authorName: author_name,
                 content: content,
                 dateAdded: new Date(),
                 children: []

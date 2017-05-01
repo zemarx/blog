@@ -25,20 +25,10 @@
                     [elementId]="'add-post-editor-content'"
                     (onEditorKeyup)="handleEditorKeyUp($event)">
             </tinymce-editor>
-
-            
-            <!--<textarea type="text" id="add-post-content"
-                      required
-                      [(ngModel)]="post.content"
-                      name="content"
-                      #content="ngModel"
-                      rows="20"
-                      cols="100">
-            </textarea>-->
         </div>
 
-        <button type="submit">Confirm</button>
+        <button md-raised-button type="submit">Confirm</button>
     </form>
 
-    <button id="back-button" (click)="goBack()">Cancel</button>
+    <button md-raised-button id="back-button" (click)="goBack()">Cancel</button>
 </div>

@@ -13,4 +13,8 @@ client/src/**/*.js.map
 client/dist
 !client/src/assets/langs/ru.js
 
+client_old/
+
+scripts/
+
 npm-debug.log

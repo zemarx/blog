@@ -5,11 +5,13 @@
 /** Single tree node object is:
    {
         _id: '',
-        postId: '',
-        parentId: '',
-        authorName: '',
+        post_id: '',
+        parent_id: '',
+        author_name: '',
+        is_archived: '',
         content: '',
-        dateAdded: '',
+        last_time_edited: '',
+        date_created: '',
         children: [ here will go all the children of the same type as parent object]
    }
 **/
@@ -22,18 +24,20 @@ const makeTree = (flat_tree) => {
     for (let i = 0; i < flat_tree.length; i++) {
         let tmpNode = {
             _id: flat_tree[i]._id,
-            postId: flat_tree[i].postId,
-            parentId: flat_tree[i].parentId,
-            authorName: flat_tree[i].authorName,
+            post_id: flat_tree[i].post_id,
+            parent_id: flat_tree[i].parent_id,
+            author_name: flat_tree[i].author_name,
+            is_archived: flat_tree[i].is_archived,
             content: flat_tree[i].content,
-            dateAdded: flat_tree[i].dateAdded,
+            last_time_edited: flat_tree[i].last_time_edited,
+            date_created: flat_tree[i].date_created,
             children: []
         };
 
         lookupList[tmpNode._id] = tmpNode;
         nodes.push(tmpNode);
 
-        if (tmpNode.parentId === null || tmpNode.parentId === '') {
+        if (tmpNode.parent_id === null || tmpNode.parent_id === '') {
             completeTree.push(tmpNode);
         }
     }
@@ -41,8 +45,8 @@ const makeTree = (flat_tree) => {
     for (let i = 0; i < nodes.length; i++) {
         let tmpNode = nodes[i];
 
-        if ((tmpNode.parentId !== null) && (tmpNode.parentId !== '')) {
-            lookupList[tmpNode.parentId].children = lookupList[tmpNode.parentId].children.concat([tmpNode]);
+        if ((tmpNode.parent_id !== null) && (tmpNode.parent_id !== '')) {
+            lookupList[tmpNode.parent_id].children = lookupList[tmpNode.parent_id].children.concat([tmpNode]);
         }
     }
 
