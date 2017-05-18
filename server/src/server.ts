@@ -21,10 +21,11 @@ const app = new Koa();
 let clientIndexPath = '';
 
 if (process.env.NODE_ENV === 'production') {
-    clientIndexPath = path.resolve(__dirname, './../client/dist');
+    clientIndexPath = path.resolve(__dirname, './../../client/dist');
 } else if (process.env.NODE_ENV === 'development') {
-    clientIndexPath = path.resolve(__dirname, './../client/src');
+    clientIndexPath = path.resolve(__dirname, './../../client/src/dist');
 }
+
 
 app.use(cors());
 app.use(bodyparser());

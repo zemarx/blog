@@ -1,11 +1,11 @@
-import Vue                   from 'vue';
-import VueRouter             from 'vue-router';
-import auth                  from './../services/auth.service';
-import Home                  from './../components/Home.vue';
-import About                 from './../components/About.vue';
-import Login                 from './../components/Login.vue';
-import CreateEditPost        from './../components/CreateEditPost.vue';
-import Post                  from './../components/Post.vue';
+import Vue              from 'vue';
+import VueRouter        from 'vue-router';
+import auth             from './../services/auth.service';
+import Home             from './../components/Home.vue';
+import About            from './../components/About.vue';
+import Login            from './../components/Login.vue';
+import CreateEditPost   from './../components/CreateEditPost.vue';
+import Post             from './../components/Post.vue';
 
 
 Vue.use(VueRouter);
@@ -33,5 +33,8 @@ export default new VueRouter({
                 next('/');
             }
         }
-    ]
+    ],
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }
+    }
 });

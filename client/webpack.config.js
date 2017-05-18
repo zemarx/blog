@@ -2,6 +2,7 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CompressionPlugin = require("compression-webpack-plugin");
 
 module.exports = {
     entry: './src/main.js',
@@ -79,6 +80,10 @@ if (process.env.NODE_ENV === 'production') {
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true
+        }),
+        new CompressionPlugin({
+            // algorithm: "gzip",
+            // test: /\.(js)$/
         })
     ])
 }

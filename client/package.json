@@ -4,7 +4,7 @@
   "version": "0.1.0",
   "author": "Mark <mark.piispanen@gmail.com>",
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --colors --compress",
+    "start": "cross-env NODE_ENV=development webpack-dev-server --hot --colors --compress",
     "build:prod": "rimraf ./dist && cross-env NODE_ENV=production webpack --progress --hide-modules",
     "build:dev": "cross-env NODE_ENV=development webpack --progress --hide-modules"
   },
@@ -20,6 +20,7 @@
     "babel-core": "^6.0.0",
     "babel-loader": "^6.0.0",
     "babel-preset-latest": "^6.24.0",
+    "compression-webpack-plugin": "^0.4.0",
     "copy-webpack-plugin": "^4.0.1",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",

@@ -5,6 +5,7 @@ npm-debug.log
 
 server/src/config/config.ts
 server/src/**/*.js
+server/src/**/*.js.map
 server/node_modules
 server/dist/
 

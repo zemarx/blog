@@ -92,44 +92,33 @@ export default {
                     author_name: this.authorName,
                     title: this.title,
                     content: this.content,
-                    date_created: this.dateCreated || null // TODO: change to -> dateCreated
+                    date_created: this.dateCreated || null
                 }
             }))
-            .then(data => {
-                console.log(JSON.stringify(data, null, 2));
-            })
-            .catch(err => {
-                console.log(err);
-            })
+            .then(data => console.log(JSON.stringify(data, null, 2)))
+            .catch(err => console.log(err))
         }
     },
-    beforeUpdate () {
-        // Creating new post
-        if (this.$route.path === '/createpost') {
-            console.log('CREATE POST');
-            // Empty all properties
-            this.id = '';
-            this.authorName = '';
-            this.title = '';
-            this.content = '';
-            this.dateCreated = '';
-        }
-    },
-    created () {
-        // Creating new post
-        if (this.$route.path === '/createpost') {
-            console.log('CREATE POST');
-            // Empty all properties
-            this.id = '';
-            this.authorName = '';
-            this.title = '';
-            this.content = '';
-            this.dateCreated = '';
+    beforeRouteEnter (to, from, next) {
+        // When routing from 'editing post' to 'creating post' we must make sure that every property is empty
+        // Method 'beforeRouteEnter' listens for changes in url and if it is '/createpost', then it empties all properties
+        if (to.path === '/createpost') {
+            next(vm => {
+                // Empty all properties
+                vm.id = '';
+                vm.authorName = '';
+                vm.title = '';
+                vm.content = '';
+                vm.dateCreated = '';
+            })
         }
 
+        next();
+    },
+
+    created () {
         // Editing post
         if (this.$route.path === '/editpost') {
-            console.log('EDIT POST');
             let postId = this.$route.query.id;
 
             if (!postId) {
@@ -137,9 +126,8 @@ export default {
                 return;
             }
 
-            // get post by postId
-            // set all the properties in the component
-            callApi(`posts/${this.$route.query.id}`)
+            // get post by postId and set all the properties in the component
+            callApi(`posts/${postId}`)
                 .then(data => {
                     let post = data;
 

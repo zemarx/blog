@@ -1,10 +1,16 @@
 import 'whatwg-fetch'
 
-const BASE_URL = 'http://localhost:3000/api/';
+const BASE_URL = `http://${window.location.host}/api/`;
 
 export const callApi = (endpoint, method = 'GET', body) => {
+    let headers = { 'content-type': 'application/json' };
+
+    if (localStorage.getItem('id_token')) {
+        headers['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
+    }
+
     return fetch(BASE_URL + endpoint, {
-        headers: { 'content-type': 'application/json' },
+        headers: headers,
         method,
         body
     })
