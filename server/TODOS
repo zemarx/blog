@@ -41,13 +41,12 @@ COMMENTS:
     TODO: ????
 
 
-//--------------------FUNCTIONALITY--------------------------
+//--------------------BACKLOG--------------------------
+
+TODO: FIX STYLES IN MAIN VIEW
+TODO: FIX GLOBAL STYLES
 
 TODO: Maybe a propery like "SHOW THIS POST"/"MAKE VISIBLE", so that author can hide chosen posts from users ?????
-
-TODO: deletion actually will make the post archived, so that is can be later restored if necessary
-
-TODO: ADD 'LAST EDITED' PROPERTY TO POST ------->>> DONE
 
 TODO: ADD ABILITY TO REMOVE COMMENTS AS ADMIN(LOGGED IN)
 
@@ -55,25 +54,26 @@ TODO: MAKE POST FILTER BY YEAR OR MONTH
 
 TODO: PAGES!?
 
-DONE: CAN UPDATE SELECTED POST
 
-DONE: MOVE "DELETE POST" TO SELECTED POST
-
-DONE: MAKE COMMENTS
-
-DONE: MAKE LOGIN AND (MAYBE REGISTRATION) #Update: made with Auth0
+TODO: MAKE LOGIN AND (MAYBE REGISTRATION)
 
 
-//----------------------STYLES--------------------------------
+//--------------------IN PROGRESS--------------------------
+
+TODO: MAKE COMMENTS
 
 
-TODO: POSTLIST STYLES
 
-TODO: SELECTED POST STYLES
+//--------------------DONE--------------------------
 
-TODO: CREATE POST STYLES
+TODO: FIX STYLES IN 'CREATE POST' VIEW IN FIREFOX(BUTTOS 'SAVE' AND 'CANCEL')
 
-TODO: COMMENTS STYLES
+TODO: ADD 'LAST EDITED' PROPERTY TO POST
+
+TODO: deletion actually will make the post archived, so that is can be later restored if necessary
+
+TODO: CAN UPDATE SELECTED POST
+
 
 
 //-----------------TIME SPENT-----------------------------------

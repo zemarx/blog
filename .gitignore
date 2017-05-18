@@ -1,3 +1,4 @@
+node_modules/
 .idea
 .vscode/
 .DS_Store
@@ -5,13 +6,8 @@ npm-debug.log
 
 server/src/config/config.ts
 server/src/**/*.js
-server/src/**/*.js.map
-server/node_modules
-server/dist/
+server/**/*.js.map
 
-client/node_modules
 client/dist
-
-client_old/
 
 scripts/
