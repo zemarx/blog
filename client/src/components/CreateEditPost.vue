@@ -17,7 +17,7 @@
             <input type="text" v-model="title"/>
         </div>
 
-        <editor :onEditorChange="this.onEditorChange" :editorContent="content"></editor>
+        <editor class="editor" :onEditorChange="this.onEditorChange" :editorContent="content"></editor>
 
         <div class="edit-buttons">
             <button @click="commitPost">Save</button>
@@ -76,17 +76,20 @@ export default {
 
         commitPost () {
             let method = 'POST';
+            let endpoint = 'posts';
+
             if (this.$route.path === '/createpost') {
                 method = 'POST';
             } else if (this.$route.path === '/editpost') {
                 method = 'PUT';
+                endpoint = `posts/${this.id}`
             }
 
-            // TODO: confirm that user wants to creat new post
+            // TODO: confirm that user wants to create new post
 
             if (this.authorName.length <= 0 || this.title.length <= 0 || this.content.length <= 0) return;
 
-            callApi('posts', method, JSON.stringify({
+            callApi(endpoint, method, JSON.stringify({
                 post: {
                     _id: this.id || null,
                     author_name: this.authorName,
@@ -95,12 +98,16 @@ export default {
                     date_created: this.dateCreated || null
                 }
             }))
-            .then(data => console.log(JSON.stringify(data, null, 2)))
+            .then(data => {
+                console.log(JSON.stringify(data, null, 2));
+
+                this.$router.replace('/');
+            })
             .catch(err => console.log(err))
         }
     },
     beforeRouteEnter (to, from, next) {
-        // When routing from 'editing post' to 'creating post' we must make sure that every property is empty
+        // When routing from 'editing post' to 'creating post' we must make sure that every property is emptied
         // Method 'beforeRouteEnter' listens for changes in url and if it is '/createpost', then it empties all properties
         if (to.path === '/createpost') {
             next(vm => {
@@ -152,7 +159,15 @@ export default {
     height: 400px;
 }
 
+.editor {
+    height: 90%;
+    margin-top: 20px;
+    padding-bottom: 44px;
+}
+
+
 .edit-buttons {
     display: flex;
+    margin-top: 10px;
 }
 </style>

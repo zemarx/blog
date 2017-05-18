@@ -3,6 +3,7 @@ var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CompressionPlugin = require("compression-webpack-plugin");
+var autoprefixer = require('autoprefixer');
 
 module.exports = {
     entry: './src/main.js',
@@ -22,7 +23,8 @@ module.exports = {
                             use: 'css-loader',
                             fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
                         })
-                    }
+                    },
+                    postcss: [autoprefixer({browsers: ['last 5 versions']})],
                 }
             },
             {

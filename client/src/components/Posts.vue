@@ -24,7 +24,7 @@ export default {
     },
     created () {
         callApi('posts')
-            .then(data => {console.log(data); this.posts = data.posts})
+            .then(data => {this.posts = data.posts})
             .catch(err => console.log(err));
     }
 }

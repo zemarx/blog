@@ -1,6 +1,7 @@
 import 'whatwg-fetch'
 
-const BASE_URL = `http://${window.location.host}/api/`;
+// const BASE_URL = `http://${window.location.host}/api/`;
+const BASE_URL = `http://${window.location.hostname}:3000/api/`;
 
 export const callApi = (endpoint, method = 'GET', body) => {
     let headers = { 'content-type': 'application/json' };
