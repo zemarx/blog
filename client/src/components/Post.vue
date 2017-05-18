@@ -1,7 +1,7 @@
 
 <template>
-    <div class="wrapper">
-        <div class="post">
+    <div class="post-wrapper">
+        <div class="post-data">
             <span class="title">{{ post.title }}</span>
             <div class="name-date">
                 <span>{{ post.author_name }}</span>
@@ -27,15 +27,21 @@ export default {
             comments: [
                 {
                     "id": 1,
+                    "author_name": "Mark",
+                    "date_created": new Date(),
                     "content": "Good post",
                     "children": [
                         {
                             "id": 2,
+                            "author_name": "Parker",
+                            "date_created": new Date(),
                             "content": "Amazing post",
                             "children": []
                         },
                         {
                             "id": 3,
+                            "author_name": "Hulk",
+                            "date_created": new Date(),
                             "content": "Horrible post",
                             "children": []
                         },
@@ -43,15 +49,21 @@ export default {
                 },
                 {
                     "id": 4,
+                    "author_name": "Batman",
+                    "date_created": new Date(),
                     "content": "Great post",
                     "children": [
                         {
                             "id": 5,
+                            "author_name": "Quentin",
+                            "date_created": new Date(),
                             "content": "Awful post",
                             "children": []
                         },
                         {
                             "id": 6,
+                            "author_name": "Bruce",
+                            "date_created": new Date(),
                             "content": "Terrific post",
                             "children": []
                         },
@@ -59,11 +71,15 @@ export default {
                 },
                 {
                     "id": 7,
+                    "author_name": "Barry",
+                    "date_created": new Date(),
                     "content": "Fantastic post",
                     "children": []
                 },
                 {
                     "id": 8,
+                    "author_name": "Jordan",
+                    "date_created": new Date(),
                     "content": "Bad post",
                     "children": []
                 },
@@ -76,7 +92,7 @@ export default {
         },
         deletePost () {
             // TODO: confirm deletion
-            this.post
+//            this.post
             // TODO: delete post -> Send post to trash -> Assign property
         }
     },
@@ -90,21 +106,23 @@ export default {
 </script>
 // -----------------------------------------------------------------------
 <style scoped>
-    .wrapper {
+    .post-wrapper {
         display: flex;
+        flex-direction: column;
         align-items: center;
         width: 100%;
         height: 100%;
         background-color: #ffffff;
     }
 
-    .post {
+    .post-data {
         width: 60%;
+        height: 500px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         margin-top: 50px;
-        padding-bottom: 40px;
+        margin-bottom: 80px;
         border-bottom: 1px solid black;
     }
 

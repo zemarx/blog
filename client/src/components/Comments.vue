@@ -1,8 +1,7 @@
 
 <template>
-    <div>
-        <comment v-for="comment in comments" :comment="comment" :key="comment._id">
-        </comment>
+    <div class="comments-wrapper">
+        <comment v-for="comment in comments" :comment="comment" :key="comment._id"></comment>
     </div>
 </template>
 // -----------------------------------------------------------------------
@@ -24,4 +23,10 @@ export default {
 </script>
 // -----------------------------------------------------------------------
 <style scoped>
+    .comments-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+        margin-bottom: 15px;
+    }
 </style>
