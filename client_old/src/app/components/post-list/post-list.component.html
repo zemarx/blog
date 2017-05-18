@@ -1,9 +1,0 @@
-<ul class="post-list">
-    <li *ngFor="let post of posts" class="post-list-item">
-        <span class="post-list-item-title">{{post.title}}</span><br>
-        <span class="post-list-item-name">{{post.authorName}}</span>
-        <span class="post-list-item-date">{{post.dateAdded | date}}</span><br>
-        <span class="post-list-item-content">{{post.content.slice(0, 400)}}...</span><br><br>
-        <a md-raised-button class="post-list-item-link" [routerLink]="['/post', post._id]" (click)="setSelectedPost(post)">Continue reading...</a>
-    </li>
-</ul>
