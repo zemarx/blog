@@ -13,7 +13,7 @@ export default class CommentService {
         let comments = await dbService
             .connection()
             .collection('comments')
-            .find({ postId: new ObjectId(post_id) })
+            .find({ post_id: new ObjectId(post_id) })
             .toArray();
 
         // Create a json tree object from adjacent list of comments
@@ -34,11 +34,11 @@ export default class CommentService {
             .collection('comments')
             .insert({
                 _id: new ObjectId(),
-                postId: (post_id !== '' && post_id !== null && post_id !== 'null') ? new ObjectId(post_id) : null,
-                parentId: (parent_id !== '' || parent_id !== null || parent_id !== 'null') ? parent_id : null,
-                authorName: author_name,
+                post_id: (post_id !== '' && post_id !== null && post_id !== 'null') ? new ObjectId(post_id) : null,
+                parent_id: (parent_id !== '' || parent_id !== null || parent_id !== 'null') ? parent_id : null,
+                author_name: author_name,
                 content: content,
-                dateAdded: new Date(),
+                date_created: new Date(),
                 children: []
             });
 

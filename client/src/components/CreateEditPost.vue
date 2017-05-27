@@ -52,7 +52,7 @@
     */
 
 import Editor from './Editor.vue';
-import { callApi } from './../services/api.service'
+import { callApi } from './../services/api.service';
 
 
 export default {
@@ -71,7 +71,7 @@ export default {
         },
 
         cancelEditing () {
-
+            this.$router.push('/post/' + this.id);
         },
 
         commitPost () {
@@ -97,13 +97,11 @@ export default {
                     content: this.content,
                     date_created: this.dateCreated || null
                 }
-            }))
-            .then(data => {
+            })).then(data => {
                 console.log(JSON.stringify(data, null, 2));
 
                 this.$router.replace('/');
-            })
-            .catch(err => console.log(err))
+            }).catch(err => console.log(err));
         }
     },
     beforeRouteEnter (to, from, next) {
@@ -134,16 +132,15 @@ export default {
             }
 
             // get post by postId and set all the properties in the component
-            callApi(`posts/${postId}`)
-                .then(data => {
-                    let post = data;
+            callApi(`posts/${postId}`).then(data => {
+                let post = data;
 
-                    this.id = post._id;
-                    this.authorName = post.author_name;
-                    this.title = post.title;
-                    this.content = post.content;
-                    this.dateAdded = post.date_created;
-                });
+                this.id = post._id;
+                this.authorName = post.author_name;
+                this.title = post.title;
+                this.content = post.content;
+                this.dateAdded = post.date_created;
+            });
         }
     },
     components: {
@@ -160,7 +157,7 @@ export default {
 }
 
 .editor {
-    height: 90%;
+    height: 350px;
     margin-top: 20px;
     padding-bottom: 44px;
 }

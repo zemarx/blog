@@ -12,8 +12,8 @@ export const callApi = (endpoint, method = 'GET', body) => {
 
     return fetch(BASE_URL + endpoint, {
         headers: headers,
-        method,
-        body
+        method: method,
+        body: JSON.stringify(body)
     })
     .then(res => res.json())
     .then(json => json)

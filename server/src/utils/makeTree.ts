@@ -31,7 +31,7 @@ const makeTree = (flat_tree) => {
             content: flat_tree[i].content,
             last_time_edited: flat_tree[i].last_time_edited,
             date_created: flat_tree[i].date_created,
-            children: []
+            children: flat_tree[i].children
         };
 
         lookupList[tmpNode._id] = tmpNode;

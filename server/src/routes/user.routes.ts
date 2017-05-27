@@ -14,38 +14,42 @@ router.post('/login', async (ctx, next) => {
     console.log('Requested login');
 
     //----------------VERIFYING JWT TOKEN------------------------------------
-    try {
-       var decoded = jwt.verify(config.jwt.testtoken, config.jwt.secret);
-       console.log('JWT verified: ' + JSON.stringify(decoded, null, 2));
-    } catch(err) {
-        console.log('Verifying failed');
-    }
+    // try {
+    //    var decoded = jwt.verify(config.jwt.testtoken, config.jwt.secret);
+    //    console.log('JWT verified: ' + JSON.stringify(decoded, null, 2));
+    // } catch(err) {
+    //     console.log('Verifying failed');
+    // }
     //----------------------------------------------------
 
     let email = ctx.request.body.email; // get email // TODO: sanitize!!!
     let password = ctx.request.body.password; // get password // TODO: sanitize!!!
 
-    let user = await authService.findUserByEmail(email);
+    // let user = await authService.findUserByEmail(email);
 
     // IN THE FUTURE 'PASSWORD' ISN'T STORED IN PLAIN TEXT, INSTEAD STORE HASHES
     // SO IN THE NEXT LINE CHECK HASHES
 
-    if (password === user.password) {
-        // auth success!
 
+    console.log(email);
+    console.log(password);
+
+    // static email and password for now
+    if (email === 'root' && password === 'toor') {
         // generate jwt token
-        let token = jwt.sign({
-            exp: Math.floor(Date.now() / 1000) + (60 * 60),
-            data: 'test_data'
-        }, config.jwt.secret);
+        const token = jwt.sign({ data: 'test_data'}, config.jwt.secret, { expiresIn: '1h' });
 
         // send token as response
-        ctx.body = token;
+        ctx.body = {
+            'status': 200,
+            'message': 'Authentication succeeded',
+            'token': token
+        }
     } else {
         ctx.body = JSON.stringify({
             'status': 401,
             'message': 'Authentication failed'
-        });;
+        });
     }
 });
 

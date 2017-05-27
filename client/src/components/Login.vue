@@ -7,9 +7,9 @@
     </p>
     <form @submit.prevent="login">
       <label><input v-model="email" placeholder="email"></label>
-      <label><input v-model="pass" placeholder="password" type="password"></label> (hint: password1)<br>
-      <button type="submit">login</button>
-      <p v-if="error" class="error">Bad login information</p>
+      <label><input v-model="password" placeholder="password" type="password"></label><br>
+      <button type="submit">Sign In</button>
+      <p v-if="error" class="error">Wrong email or password</p>
     </form>
   </div>
 </template>
@@ -21,14 +21,14 @@ export default {
     data () {
         return {
             email: 'root',
-            pass: 'toor',
+            password: 'toor',
             error: false
         }
     },
     methods: {
         login () {
-            auth.login(this.email, this.pass, loggedIn => {
-                if (!auth.loggedIn) {
+            auth.login(this.email, this.password, loggedIn => {
+                if (!loggedIn) {
                     this.error = true
                 } else {
                     this.$router.replace(this.$route.query.redirect || '/')

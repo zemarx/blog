@@ -22,10 +22,10 @@ export default new VueRouter({
     mode: 'history',
     routes: [
         { path: '/', component: Home },        
-        { path: '/editpost', component: CreateEditPost },
-        { path: '/createpost', component: CreateEditPost },
+        { path: '/editpost', component: CreateEditPost, beforeEnter: requireAuth },
+        { path: '/createpost', component: CreateEditPost, beforeEnter: requireAuth },
         { path: '/post/:post_id', component: Post },
-        { path: '/about', component: About, beforeEnter: requireAuth },
+        { path: '/about', component: About },
         { path: '/login', component: Login },
         { path: '/logout',
             beforeEnter (to, from, next) {

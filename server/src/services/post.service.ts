@@ -19,7 +19,7 @@ export default class PostService {
             return;
         }
 
-        let results = await db.connection()
+        let result = await db.connection()
             .collection('posts')
             .insert({
                 _id: new ObjectId(),
@@ -31,7 +31,7 @@ export default class PostService {
                 date_created: new Date()
             });
 
-        return results.ops;
+        return result.ops;
     }
 
 
@@ -87,9 +87,25 @@ export default class PostService {
     // TODO: deletion actually will make the post archived, so that is can be later restored if necessary
 
     public async deletePost(id: string) {
-        let results = await db.connection().collection('posts').removeOne({ _id: new ObjectId(id) });
+        // let results = await db.connection().collection('posts').removeOne({ _id: new ObjectId(id) }); // obsolete method
 
-        let isSuccess = results.result.n === 1;
+        console.log('REMOVING POST FROM SERVICE' + id);
+
+        let result = await db.connection()
+            .collection('posts')
+            .findOneAndUpdate(
+                {
+                    _id: new ObjectId(id)
+                },
+                {
+                    $set: {
+                        is_archived: true,
+                    }
+                });
+
+
+
+        let isSuccess = result.result.n === 1;
 
         let response = {
             text: '',

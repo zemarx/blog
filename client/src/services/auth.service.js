@@ -1,76 +1,63 @@
 
+import { callApi } from './api.service'
+
 export default {
 
-    handleError() {
+    handleAuthError() {
 
     },
 
-    login(email, pass, cb) {
-        cb = arguments[arguments.length - 1];
+    login(email, password, callback) {
+        callApi('login', 'POST', {
+            email: email,
+            password: password
+        })
+        .then(res => {
+            if (res.status === 200) {
+                let token = res.token;
+                console.log(token);
+                localStorage.setItem("id_token", token);
 
-        if (localStorage.token) {
-            if (cb) {
-                cb(true);
-            }
+                // TODO: parse token and set localStorage item named "profile" to token's claim
 
-            this.onAuthChange(true);
-
-            return;
-        }
-
-        pretendRequest(email, pass, (res) => {
-            if (res.authenticated) {
-                localStorage.token = res.token;
-
-                if (cb) {
-                    cb(true);
+                if (callback) {
+                    callback(true);
                 }
-
-                this.onAuthChange(true)
-            } else {
-                if (cb) {
-                    cb(false);
-                }
-
-                this.onAuthChange(false)
+                this.onAuthChange(true);
+            } else if (res.status === 401) {
+                throw Error('Authentication failed');
             }
         })
+        .catch(err => {
+            // Login failed
+
+            if (callback) {
+                callback(false);
+            }
+
+            this.onAuthChange(false);
+        });
     },
 
     getToken() {
-        return localStorage.token
+        return localStorage.getItem("id_token");
     },
 
-    logout(cb) {
-        delete localStorage.token;
+    logout(callback) {
+        localStorage.removeItem("id_token");
 
-        if (cb) {
-            cb()
+        if (callback) {
+            callback()
         }
 
         this.onAuthChange(false);
     },
 
     loggedIn() {
-        return !!localStorage.token
+        return !!localStorage.getItem("id_token");
     },
 
     onAuthChange() {
-
+        // this function is implemented elsewhere so it will be called there, where it is implemented
     }
 }
-
-
-function pretendRequest(email, pass, cb) {
-    setTimeout(() => {
-        if (email === 'root' && pass === 'toor') {
-            cb({
-                authenticated: true,
-                token: Math.random().toString(36).substring(7)
-            })
-        } else {
-            cb({ authenticated: false })
-        }
-    }, 0)
-}
-

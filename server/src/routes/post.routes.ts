@@ -4,7 +4,8 @@ import * as Router from 'koa-router';
 import PostService from '../services/post.service';
 
 const postService = new PostService();
-const router = new Router({ prefix: '/api'});
+const postRoutesPrivate = new Router({ prefix: '/api'});
+const postRoutesPublic = new Router({ prefix: '/api'});
 
 // GET:    http://localhost:3000/api/posts       ---> Get all posts
 // POST:   http://localhost:3000/api/posts       ---> Add one post
@@ -14,7 +15,7 @@ const router = new Router({ prefix: '/api'});
 
 // Get all posts
 // Returns object "posts" of type array with all the posts
-router.get('/posts', async (ctx, next) => {
+postRoutesPublic.get('/posts', async (ctx, next) => {
     try {
         let posts = await postService.getAllPosts();
 
@@ -27,7 +28,7 @@ router.get('/posts', async (ctx, next) => {
 
 // Add new post
 // Retuns created post in response
-router.post('/posts', async (ctx, next) => {
+postRoutesPrivate.post('/posts', async (ctx, next) => {
     try {
         ctx.body = await postService.addNewPost(ctx.request.body.post);
     } catch (err) {
@@ -37,7 +38,7 @@ router.post('/posts', async (ctx, next) => {
 });
 
 // Update post
-router.put('/posts/:_id', async (ctx, next) => {
+postRoutesPrivate.put('/posts/:_id', async (ctx, next) => {
     try {
         ctx.body = await postService.updatePost(ctx.params._id, ctx.request.body.post);
     } catch (err) {
@@ -47,7 +48,7 @@ router.put('/posts/:_id', async (ctx, next) => {
 });
 
 // Get one post by id
-router.get('/posts/:_id', async (ctx, next) => {
+postRoutesPublic.get('/posts/:_id', async (ctx, next) => {
     try {
         ctx.body = await postService.getPost(ctx.params._id);
     } catch (err) {
@@ -57,8 +58,9 @@ router.get('/posts/:_id', async (ctx, next) => {
 });
 
 // Delete one post by id
-router.delete('/posts/:_id', (ctx, next) => {
+postRoutesPrivate.delete('/posts/:_id', (ctx, next) => {
     try {
+        console.log('REMOVING POST FROM ROUTER');
         ctx.body = postService.deletePost(ctx.params._id);
     } catch (err) {
         // TODO: send error object to client
@@ -66,4 +68,7 @@ router.delete('/posts/:_id', (ctx, next) => {
     }
 });
 
-export default router;
+export {
+    postRoutesPrivate,
+    postRoutesPublic
+}

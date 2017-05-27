@@ -8,10 +8,10 @@
                 <li>
                     <router-link to="/about">{{ $t('nav.about') }}</router-link>
                 </li>
-                <li>
+                <li v-if="loggedIn">
                     <router-link to="/createpost">{{ $t('nav.createPost') }}</router-link>
                 </li>
-                <li>
+                <li class="select-lang">
                     <div>
                         <select v-model="locale">
                             <option disabled value="">Language</option>
@@ -44,15 +44,20 @@ export default {
         }
     },
     watch: {
-        // TODO: Set locale to local storage, so if page updates it can be restored
         locale (val) {
+            localStorage.setItem("locale", val);
             this.$i18n.locale = val;
         }
     },
     created () {
-        // Set onChange() function in auth service, so that when calling onChange() in auth service this function get invoked
+        // Set onAuthChange() function in auth service, so that when calling onAuthChange() in auth service this function get invoked
         auth.onAuthChange = loggedIn => {
             this.loggedIn = loggedIn;
+        };
+
+        let locale = localStorage.getItem("locale");
+        if (locale) {
+            this.locale = locale;
         }
     }
 }
@@ -60,17 +65,17 @@ export default {
 // -------------------------------STYLE------------------------------------------
 <style>
 html, body {
-    height: 100%;
     margin: 0;
     padding: 0;
 }
 
 body {
+    height: 100%;
     font-size: 20px;
 }
 
 .wrapper {
-    height: 100%;
+    height: 100% !important;
     display: flex;
     flex-direction: column;
 }
@@ -92,7 +97,7 @@ nav > ul li {
     list-style: none;
 }
 
-nav > ul li:nth-child(4) {
+nav .select-lang {
     margin-left: auto;
 }
 

@@ -8,21 +8,28 @@
                 <span>{{ post.date_created }}</span>
             </div>
             <p v-html="post.content" class="content"></p>
-            <button @click="editPost">Edit Post</button>
-            <button @click="deletePost">Delete Post</button>
+            <button v-if="loggedIn" @click="editPost">Edit Post</button>
+            <button v-if="loggedIn" @click="deletePost">Delete Post</button>
         </div>
 
         <comments :comments="comments"></comments>
+
+        <div class="add-comment-wrapper">
+            <input type="text" id="author_name" placeholder="Your name...">
+            <textarea name="" cols="30" rows="5" placeholder="What do you think?"></textarea>
+        </div>
     </div>
 </template>
 // -----------------------------------------------------------------------
 <script>
 import Comments from './Comments.vue'
 import { callApi } from './../services/api.service'
+import auth from './../services/auth.service';
 
 export default {
     data () {
         return {
+            loggedIn: auth.loggedIn(),
             post: {},
             comments: [
                 {
@@ -91,13 +98,25 @@ export default {
             this.$router.push('/editpost?id=' + this.post._id)
         },
         deletePost () {
-            // TODO: confirm deletion
-//            this.post
-            // TODO: delete post -> Send post to trash -> Assign property
+            let confirmDeletion = confirm('Do you really want to delete this post?');
+            if (confirmDeletion) {
+                callApi(`posts/${this.post._id}`, 'DELETE').then(res => {
+                    this.$router.push('/');
+                    alert('Post deleted successfully');
+                }).catch(err => {
+                    alert('Error deleting post');
+                })
+            }
         }
     },
     created () {
-        callApi(`posts/${this.$route.params.post_id}`).then(data => this.post = data);
+        callApi(`posts/${this.$route.params.post_id}`).then(data => {
+            this.post = data
+        });
+
+        callApi(`comments?post_id=${this.$route.params.post_id}`).then(data => {
+            this.comments = data;
+        })
     },
     components: {
         Comments
@@ -117,12 +136,12 @@ export default {
 
     .post-data {
         width: 60%;
-        height: 500px;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        padding-bottom: 40px;
         margin-top: 50px;
-        margin-bottom: 80px;
+        margin-bottom: 40px;
         border-bottom: 1px solid black;
     }
 
@@ -150,5 +169,13 @@ export default {
 
     .content {
         font-size: 23px;
+    }
+
+    .add-comment-wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+
+        margin: 40px 0 70px 0;
     }
 </style>
