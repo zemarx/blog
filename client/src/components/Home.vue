@@ -1,6 +1,6 @@
 
 <template>
-  <div class="wrapper">
+  <div class="home-wrapper">
     <posts></posts>
   </div>
 </template>
@@ -21,9 +21,9 @@ export default {
 </script>
 // -------------------------------STYLE------------------------------------------
 <style scoped>
-    .wrapper {
+    .home-wrapper {
         height: 100%;
         width: 100%;
-        background-color: #f2f988;
+        /*background-color: #f2f988;*/
     }
 </style>

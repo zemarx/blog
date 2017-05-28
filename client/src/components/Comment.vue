@@ -5,10 +5,10 @@
             <div><span>&#149;</span> {{comment.author_name}} | {{(comment.date_created + "").slice(0, 15)}}</div>
             <div>{{comment.content}}</div>
             <button @click="toggleReply">{{ $t('comment.show_reply_button')}}</button>
-            <div v-if="replyVisible">
+            <div class="comment-reply" v-if="replyVisible">
                 <input v-model="replyAuthor" placeholder="Your name" type="text" value="Your name">
-                <textarea v-model="replyContent" placeholder="Write a reply..."></textarea>
-                <button @click="addReply">{{ $t('comment.submit_reply_button')}}</button>
+                <textarea @keyup.enter="addReply" v-model="replyContent" placeholder="Write a reply..."></textarea>
+                <!--<button @click="addReply">{{ $t('comment.submit_reply_button')}}</button>-->
             </div>
         </div>
 
@@ -43,6 +43,8 @@ export default {
             this.replyVisible = !this.replyVisible;
         },
         addReply () {
+            this.replyVisible = false;
+
             callApi('comments', 'POST', {
                 comment: {
                     _id: '',
@@ -66,7 +68,6 @@ export default {
                     })
                 }
 
-                this.replyVisible = false;
                 this.replyAuthor = '';
                 this.replyContent = '';
             }).catch(err => {
@@ -98,8 +99,8 @@ export default {
     }
 
     .comment-data-wrapper button {
-        height: 20px;
-        width: 50px;
+        /*height: 28px;*/
+        width: 80px;
     }
 
     .comment-data-wrapper textarea {
@@ -117,5 +118,24 @@ export default {
 
     .comment-data-wrapper > div:last-child {
         font-size: 21px;
+    }
+
+    .comment-reply {
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #f5f5f5;
+        background-color: #e7e7e7;
+    }
+
+    .comment-reply input{
+        margin-top: 5px;
+        width: 130px;
+    }
+
+    .comment-reply textarea {
+        margin-top: 5px;
+        /*width: 160px;*/
+        width: 90%;
+        height: 60px;
     }
 </style>

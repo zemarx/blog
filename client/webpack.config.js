@@ -1,7 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
+// var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CompressionPlugin = require("compression-webpack-plugin");
 var autoprefixer = require('autoprefixer');
 
@@ -19,10 +19,10 @@ module.exports = {
                 loader: 'vue-loader',
                 options: {
                     loaders: {
-                        css: ExtractTextPlugin.extract({
-                            use: 'css-loader',
-                            fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
-                        })
+                        // css: ExtractTextPlugin.extract({
+                        //     use: 'css-loader',
+                        //     fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+                        // })
                     },
                     postcss: [autoprefixer({browsers: ['last 5 versions']})],
                 }
@@ -60,7 +60,7 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'public/index.html'
         }),
-        new ExtractTextPlugin("style.css")
+        // new ExtractTextPlugin("style.css")
     ],
     devtool: '#eval-source-map'
 };

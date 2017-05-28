@@ -1,6 +1,6 @@
 
 <template>
-    <div class="wrapper">
+    <div class="posts-wrapper">
         <div class="post" v-for="post in posts">
             <span class="title">{{ post.title }}</span>
             <div class="name-date">
@@ -31,11 +31,11 @@ export default {
 </script>
 // ------------------------------ STYLES -----------------------------------------
 <style scoped>
-    .wrapper {
+    .posts-wrapper {
         display: flex;
+        flex-direction: column;
         align-items: center;
         width: 100%;
-        height: 100%;
         background-color: #ffffff;
     }
 

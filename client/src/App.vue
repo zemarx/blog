@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper">
+    <div class="root-wrapper">
         <nav>
             <ul class="nav-wrapper">
                 <li>
@@ -65,62 +65,79 @@ export default {
 </script>
 // -------------------------------STYLE------------------------------------------
 <style>
-html, body {
-    margin: 0;
-    padding: 0;
-}
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+    }
 
-body {
-    height: 100%;
-    font-size: 20px;
-}
+    .root-wrapper {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
 
-.wrapper {
-    height: 100% !important;
-    display: flex;
-    flex-direction: column;
-}
+    nav > ul {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
 
-nav > ul {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
+        background-color: #dedede;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        height: 70px;
+    }
 
-    background-color: #dedede;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 70px;
-}
+    nav > ul li {
+        margin-left: 30px;
+        list-style: none;
+    }
 
-nav > ul li {
-    margin-left: 30px;
-    list-style: none;
-}
+    nav .select-lang {
+        margin-left: auto;
+    }
 
-nav .select-lang {
-    margin-left: auto;
-}
+    nav > ul li:last-child {
+        margin-right: 40px;
+    }
 
-nav > ul li:last-child {
-    margin-right: 40px;
-}
+    nav > ul li a {
+        text-decoration: none;
+    }
 
-nav > ul li a {
-    text-decoration: none;
-}
+    .fade-enter-active, .fade-leave-active {
+        transition-property: opacity;
+        transition-duration: .16s;
+    }
 
-.fade-enter-active, .fade-leave-active {
-    transition-property: opacity;
-    transition-duration: .16s;
-}
+    .fade-enter-active {
+        transition-delay: .16s;
+    }
 
-.fade-enter-active {
-    transition-delay: .16s;
-}
+    .fade-enter, .fade-leave-active {
+        opacity: 0
+    }
 
-.fade-enter, .fade-leave-active {
-    opacity: 0
-}
+
+
+    button {
+        display: inline-block;
+        font-size: 15px;
+        font-weight: 600;
+        border-radius: 2px;
+        background-color: #ffffff;
+        border: 1px solid #ffffff;
+        box-shadow: rgba(0, 0, 0, 0.12) 0 2px 6px, rgba(0, 0, 0, 0.12) 0 2px 6px;
+        transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #dedede;
+        border: 1px solid #dedede;
+    }
 
 </style>

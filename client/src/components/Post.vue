@@ -8,11 +8,16 @@
                 <span>{{ post.date_created }}</span>
             </div>
             <p v-html="post.content" class="content"></p>
-            <button v-if="loggedIn" @click="editPost">{{ $t('selected_post.edit_button') }}</button>
-            <button v-if="loggedIn" @click="deletePost">{{ $t('selected_post.delete_button') }}</button>
+
+            <div>
+                <button v-if="loggedIn" @click="editPost">{{ $t('selected_post.edit_button') }}</button>
+                <button v-if="loggedIn" @click="deletePost">{{ $t('selected_post.delete_button') }}</button>
+            </div>
         </div>
 
-        <comments :comments="comments"></comments>
+        <div class="comments-wrapper">
+            <comments :comments="comments"></comments>
+        </div>
 
         <div class="add-comment-wrapper">
             <input v-model="commentAuthor" type="text" id="author_name" placeholder="Your name...">
@@ -103,7 +108,7 @@ export default {
         flex-direction: column;
         align-items: center;
         width: 100%;
-        height: 100%;
+        /*height: 100%;*/
         background-color: #ffffff;
     }
 
@@ -144,10 +149,15 @@ export default {
         font-size: 23px;
     }
 
+    .comments-wrapper {
+        width: 60%;
+    }
+
     .add-comment-wrapper {
         display: flex;
         flex-direction: column;
         width: 60%;
+        height: 130px;
 
         margin: 40px 0 70px 0;
     }
