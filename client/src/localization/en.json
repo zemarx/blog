@@ -3,18 +3,43 @@
   "nav": {
     "home": "Home",
     "about": "About",
-    "createPost": "Create Post",
-    "signIn": "Sign In",
-    "signOut": "Sign Out"
+    "create_post": "Create Post",
+    "sign_in": "Sign In",
+    "sign_out": "Sign Out"
   },
-  "createEditPost": {
-    "createNewPost": "Create new post",
-    "editPost": "Edit post",
-    "authorName": "Author name",
-    "title": "Title"
-  },
+
   "home": {
-    "readMore": "Read more"
+    "read_more": "Read more"
   },
-  "hello": "Hello friend!"
+
+  "about": {
+
+  },
+
+  "login": {
+    "login_heading": "Login",
+    "email": "Email",
+    "password": "Password",
+    "sign_in_button": "Sign In"
+  },
+
+  "selected_post": {
+    "edit_button": "Edit post",
+    "delete_button": "Delete post",
+    "submit_comment_button": "Submit comment"
+  },
+
+  "comment": {
+    "show_reply_button": "Reply",
+    "submit_reply_button": "Submit reply"
+  },
+
+  "create_edit_post": {
+    "create_new_post": "Create new post",
+    "edit_post": "Edit post",
+    "author_name": "Author name",
+    "title": "Title",
+    "save_button": "Save",
+    "cancel_button": "Cancel"
+  }
 }

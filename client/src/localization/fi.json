@@ -1,1 +1,45 @@
+{
+  "lang": "Suomi",
+  "nav": {
+    "home": "Pääsivu",
+    "about": "Blogista",
+    "create_post": "Luo postaus",
+    "sign_in": "Kirjaudu sisään",
+    "sign_out": "Kirjaudu ulos"
+  },
 
+  "home": {
+    "read_more": "Lue lisää"
+  },
+
+  "about": {
+
+  },
+
+  "login": {
+    "login_heading": "Kirjaudu",
+    "email": "Sähköposti",
+    "password": "Salasana",
+    "sign_in_button": "Kirjaudu sisään"
+  },
+
+  "selected_post": {
+    "edit_button": "Muuttaa postaus",
+    "delete_button": "Poista postaus",
+    "submit_comment_button": "Lisää kommentti"
+  },
+
+  "comment": {
+    "show_reply_button": "Vasta",
+    "submit_reply_button": "Tallenna vastaus"
+  },
+
+  "create_edit_post": {
+    "create_new_post": "Luo uusi postaus",
+    "edit_post": "Muuttaa postaus",
+    "author_name": "Tekijän nimi",
+    "title": "Otsikko",
+    "save_button": "Tallenna",
+    "cancel_button": "Peruutta"
+  }
+}

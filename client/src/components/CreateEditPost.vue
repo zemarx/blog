@@ -2,26 +2,26 @@
 <template>
     <div class="wrapper">
         <h1 v-if="this.$route.path === '/createpost'">
-            {{ $t('createEditPost.createNewPost') }}
+            {{ $t('create_edit_post.create_new_post') }}
         </h1>
         <h1 v-else>
-            {{ $t('createEditPost.editPost') }}
+            {{ $t('create_edit_post.edit_post') }}
         </h1>
 
         <div>
-            <label>{{ $t('createEditPost.authorName') }}:</label>
+            <label>{{ $t('create_edit_post.author_name') }}:</label>
             <input type="text" v-model="authorName"/>
         </div>
         <div>
-            <label>{{ $t('createEditPost.title') }}:</label>
+            <label>{{ $t('create_edit_post.title') }}:</label>
             <input type="text" v-model="title"/>
         </div>
 
         <editor class="editor" :onEditorChange="this.onEditorChange" :editorContent="content"></editor>
 
         <div class="edit-buttons">
-            <button @click="commitPost">Save</button>
-            <button @click="cancelEditing">Cancel</button>
+            <button @click="commitPost">{{ $t('create_edit_post.save_button') }}</button>
+            <button @click="cancelEditing">{{ $t('create_edit_post.cancel_button') }}</button>
         </div>
     </div>
 </template>

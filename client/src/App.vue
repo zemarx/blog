@@ -9,7 +9,7 @@
                     <router-link to="/about">{{ $t('nav.about') }}</router-link>
                 </li>
                 <li v-if="loggedIn">
-                    <router-link to="/createpost">{{ $t('nav.createPost') }}</router-link>
+                    <router-link to="/createpost">{{ $t('nav.create_post') }}</router-link>
                 </li>
                 <li class="select-lang">
                     <div>
@@ -17,12 +17,13 @@
                             <option disabled value="">Language</option>
                             <option>en</option>
                             <option>ru</option>
+                            <option>fi</option>
                         </select>
                     </div>
                 </li>
                 <li>
-                    <router-link v-if="loggedIn" to="/logout">{{ $t('nav.signOut') }}</router-link>
-                    <router-link v-if="!loggedIn" to="/login">{{ $t('nav.signIn') }}</router-link>
+                    <router-link v-if="loggedIn" to="/logout">{{ $t('nav.sign_out') }}</router-link>
+                    <router-link v-if="!loggedIn" to="/login">{{ $t('nav.sign_in') }}</router-link>
                 </li>
             </ul>
         </nav>

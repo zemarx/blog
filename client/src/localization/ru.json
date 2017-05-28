@@ -3,18 +3,43 @@
   "nav": {
     "home": "Главная",
     "about": "О блоге",
-    "createPost": "Создать пост",
-    "signIn": "Войти",
-    "signOut": "Выйти"
+    "create_post": "Создать пост",
+    "sign_in": "Войти",
+    "sign_out": "Выйти"
   },
-  "createEditPost": {
-    "createNewPost": "Создать новый пост",
-    "editPost": "Редактировать пост",
-    "authorName": "Имя автора",
-    "title": "Заголовок"
-  },
+
   "home": {
-    "readMore": "Читать больше"
+    "read_more": "Читать больше"
   },
-  "hello": "Привет друг!"
+
+  "about": {
+
+  },
+
+  "login": {
+    "login_heading": "Вход",
+    "email": "эмайл",
+    "password": "пароль",
+    "sign_in_button": "Войти"
+  },
+
+  "selected_post": {
+    "edit_button": "Редактировать пост",
+    "delete_button": "Удалить пост",
+    "submit_comment_button": "Добавить комментарий"
+  },
+
+  "comment": {
+    "show_reply_button": "Ответить",
+    "submit_reply_button": "Сохранить ответ"
+  },
+
+  "create_edit_post": {
+    "create_new_post": "Создать новый пост",
+    "edit_post": "Редактировать пост",
+    "author_name": "Имя автора",
+    "title": "Заголовок",
+    "save_button": "Сохранить",
+    "cancel_button": "Отменить"
+  }
 }

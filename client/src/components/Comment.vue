@@ -4,11 +4,11 @@
         <div class="comment-data-wrapper">
             <div><span>&#149;</span> {{comment.author_name}} | {{(comment.date_created + "").slice(0, 15)}}</div>
             <div>{{comment.content}}</div>
-            <button @click="toggleReply">Reply</button>
+            <button @click="toggleReply">{{ $t('comment.show_reply_button')}}</button>
             <div v-if="replyVisible">
                 <input v-model="replyAuthor" placeholder="Your name" type="text" value="Your name">
                 <textarea v-model="replyContent" placeholder="Write a reply..."></textarea>
-                <button @click="addReply">Submit reply</button>
+                <button @click="addReply">{{ $t('comment.submit_reply_button')}}</button>
             </div>
         </div>
 

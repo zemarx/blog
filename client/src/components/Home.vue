@@ -1,7 +1,6 @@
 
 <template>
   <div class="wrapper">
-    <!--<h2>{{ $t('nav.home') }}</h2>-->
     <posts></posts>
   </div>
 </template>

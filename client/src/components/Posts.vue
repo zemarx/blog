@@ -8,7 +8,7 @@
                 <span>{{ post.date_created }}</span>
             </div>
             <p v-html="post.content" class="content"></p>
-            <router-link :to="{ path: `/post/${post._id}`}">{{ $t('home.readMore') }}...</router-link>
+            <router-link :to="{ path: `/post/${post._id}`}">{{ $t('home.read_more') }}...</router-link>
         </div>
     </div>
 </template>

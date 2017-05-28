@@ -8,8 +8,8 @@
                 <span>{{ post.date_created }}</span>
             </div>
             <p v-html="post.content" class="content"></p>
-            <button v-if="loggedIn" @click="editPost">Edit Post</button>
-            <button v-if="loggedIn" @click="deletePost">Delete Post</button>
+            <button v-if="loggedIn" @click="editPost">{{ $t('selected_post.edit_button') }}</button>
+            <button v-if="loggedIn" @click="deletePost">{{ $t('selected_post.delete_button') }}</button>
         </div>
 
         <comments :comments="comments"></comments>
@@ -17,7 +17,7 @@
         <div class="add-comment-wrapper">
             <input v-model="commentAuthor" type="text" id="author_name" placeholder="Your name...">
             <textarea v-model="commentContent" name="" cols="30" rows="5" placeholder="What do you think?"></textarea>
-            <button @click="addComment">Submit comment</button>
+            <button @click="addComment">{{ $t('selected_post.submit_comment_button') }}</button>
         </div>
     </div>
 </template>
