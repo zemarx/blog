@@ -111,11 +111,11 @@ nav > ul li a {
 
 .fade-enter-active, .fade-leave-active {
     transition-property: opacity;
-    transition-duration: .20s;
+    transition-duration: .16s;
 }
 
 .fade-enter-active {
-    transition-delay: .20s;
+    transition-delay: .16s;
 }
 
 .fade-enter, .fade-leave-active {

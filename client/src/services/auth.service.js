@@ -7,6 +7,21 @@ export default {
 
     },
 
+
+    parseJwt(token) {
+        let parts = token.split('.');
+
+        if (parts.length !== 3) {
+            //err
+        }
+
+        let header = window.atob(parts[0]);
+        let claim = window.atob(parts[1]);
+
+        return { header, claim }
+    },
+
+
     login(email, password, callback) {
         callApi('login', 'POST', {
             email: email,
@@ -15,10 +30,10 @@ export default {
         .then(res => {
             if (res.status === 200) {
                 let token = res.token;
-                console.log(token);
-                localStorage.setItem("id_token", token);
+                let { claim } = this.parseJwt(token);
 
-                // TODO: parse token and set localStorage item named "profile" to token's claim
+                localStorage.setItem("id_token", token);
+                localStorage.setItem("profile", claim);
 
                 if (callback) {
                     callback(true);
@@ -39,9 +54,11 @@ export default {
         });
     },
 
+
     getToken() {
         return localStorage.getItem("id_token");
     },
+
 
     logout(callback) {
         localStorage.removeItem("id_token");
@@ -53,9 +70,11 @@ export default {
         this.onAuthChange(false);
     },
 
+
     loggedIn() {
         return !!localStorage.getItem("id_token");
     },
+
 
     onAuthChange() {
         // this function is implemented elsewhere so it will be called there, where it is implemented

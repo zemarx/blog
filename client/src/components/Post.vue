@@ -15,82 +15,26 @@
         <comments :comments="comments"></comments>
 
         <div class="add-comment-wrapper">
-            <input type="text" id="author_name" placeholder="Your name...">
-            <textarea name="" cols="30" rows="5" placeholder="What do you think?"></textarea>
+            <input v-model="commentAuthor" type="text" id="author_name" placeholder="Your name...">
+            <textarea v-model="commentContent" name="" cols="30" rows="5" placeholder="What do you think?"></textarea>
+            <button @click="addComment">Submit comment</button>
         </div>
     </div>
 </template>
 // -----------------------------------------------------------------------
 <script>
-import Comments from './Comments.vue'
-import { callApi } from './../services/api.service'
+import Comments from './Comments.vue';
+import { callApi } from './../services/api.service';
 import auth from './../services/auth.service';
 
 export default {
     data () {
         return {
             loggedIn: auth.loggedIn(),
+            commentAuthor: '',
+            commentContent: '',
             post: {},
-            comments: [
-                {
-                    "id": 1,
-                    "author_name": "Mark",
-                    "date_created": new Date(),
-                    "content": "Good post",
-                    "children": [
-                        {
-                            "id": 2,
-                            "author_name": "Parker",
-                            "date_created": new Date(),
-                            "content": "Amazing post",
-                            "children": []
-                        },
-                        {
-                            "id": 3,
-                            "author_name": "Hulk",
-                            "date_created": new Date(),
-                            "content": "Horrible post",
-                            "children": []
-                        },
-                    ]
-                },
-                {
-                    "id": 4,
-                    "author_name": "Batman",
-                    "date_created": new Date(),
-                    "content": "Great post",
-                    "children": [
-                        {
-                            "id": 5,
-                            "author_name": "Quentin",
-                            "date_created": new Date(),
-                            "content": "Awful post",
-                            "children": []
-                        },
-                        {
-                            "id": 6,
-                            "author_name": "Bruce",
-                            "date_created": new Date(),
-                            "content": "Terrific post",
-                            "children": []
-                        },
-                    ]
-                },
-                {
-                    "id": 7,
-                    "author_name": "Barry",
-                    "date_created": new Date(),
-                    "content": "Fantastic post",
-                    "children": []
-                },
-                {
-                    "id": 8,
-                    "author_name": "Jordan",
-                    "date_created": new Date(),
-                    "content": "Bad post",
-                    "children": []
-                },
-            ]
+            comments: []
         }
     },
     methods: {
@@ -107,6 +51,35 @@ export default {
                     alert('Error deleting post');
                 })
             }
+        },
+
+        addComment () {
+            callApi('comments', 'POST', {
+                comment: {
+                    _id: '',
+                    parent_id: null,
+                    post_id: this.post._id,
+                    author_name: this.commentAuthor,
+                    content: this.commentContent,
+                    date_created: new Date(),
+                    children: []
+                }
+            }).then(res => {
+                this.comments.push({
+                    id: res._id,
+                    parent_id: res.parent_id,
+                    post_id: res.post_id,
+                    author_name: res.author_name,
+                    content: res.content,
+                    date_created: res.date_created,
+                    children: res.children
+                });
+
+                this.commentAuthor = '';
+                this.commentContent = '';
+            }).catch(err => {
+                alert('Something went wrong :/');
+            });
         }
     },
     created () {
@@ -179,3 +152,65 @@ export default {
         margin: 40px 0 70px 0;
     }
 </style>
+
+
+<!--[
+                {
+                    "id": 1,
+                    "author_name": "Mark",
+                    "date_created": new Date(),
+                    "content": "Good post",
+                    "children": [
+                        {
+                            "id": 2,
+                            "author_name": "Parker",
+                            "date_created": new Date(),
+                            "content": "Amazing post",
+                            "children": []
+                        },
+                        {
+                            "id": 3,
+                            "author_name": "Hulk",
+                            "date_created": new Date(),
+                            "content": "Horrible post",
+                            "children": []
+                        },
+                    ]
+                },
+                {
+                    "id": 4,
+                    "author_name": "Batman",
+                    "date_created": new Date(),
+                    "content": "Great post",
+                    "children": [
+                        {
+                            "id": 5,
+                            "author_name": "Quentin",
+                            "date_created": new Date(),
+                            "content": "Awful post",
+                            "children": []
+                        },
+                        {
+                            "id": 6,
+                            "author_name": "Bruce",
+                            "date_created": new Date(),
+                            "content": "Terrific post",
+                            "children": []
+                        },
+                    ]
+                },
+                {
+                    "id": 7,
+                    "author_name": "Barry",
+                    "date_created": new Date(),
+                    "content": "Fantastic post",
+                    "children": []
+                },
+                {
+                    "id": 8,
+                    "author_name": "Jordan",
+                    "date_created": new Date(),
+                    "content": "Bad post",
+                    "children": []
+                },
+            ]-->

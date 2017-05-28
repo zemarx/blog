@@ -5,7 +5,11 @@
             <div><span>&#149;</span> {{comment.author_name}} | {{(comment.date_created + "").slice(0, 15)}}</div>
             <div>{{comment.content}}</div>
             <button @click="toggleReply">Reply</button>
-            <textarea v-if="replyVisible" placeholder="Write a reply..."></textarea>
+            <div v-if="replyVisible">
+                <input v-model="replyAuthor" placeholder="Your name" type="text" value="Your name">
+                <textarea v-model="replyContent" placeholder="Write a reply..."></textarea>
+                <button @click="addReply">Submit reply</button>
+            </div>
         </div>
 
         <comments v-if="comment.children.length > 0" :comments="comment.children"></comments>
@@ -14,11 +18,14 @@
 // -----------------------------------------------------------------------
 <script>
 import Comments from './Comments.vue';
+import { callApi } from './../services/api.service';
 
 export default {
     name: 'comment',
     data () {
         return {
+            replyAuthor: '',
+            replyContent: '',
             replyVisible: false
         }
     },
@@ -36,26 +43,35 @@ export default {
             this.replyVisible = !this.replyVisible;
         },
         addReply () {
-//            callApi('comments', 'POST', JSON.stringify({
-//                id: id,
-//                author_name: "",
-//                content: "",
-//                date_created: new Date(),
-//                children: []
-//            }))
-//                .then(res => {
-//                    this.comment.children.push({
-//                        id: res.data.id,
-//                        author_name: "",
-//                        content: "",
-//                        date_created: new Date(),
-//                        children: []
-//                    })
-//                })
-//                .catch(err => {
-//
-//                });
+            callApi('comments', 'POST', {
+                comment: {
+                    _id: '',
+                    parent_id: this.comment._id,
+                    post_id: this.comment.post_id,
+                    author_name: this.replyAuthor,
+                    content: this.replyContent,
+                    date_created: new Date(),
+                    children: []
+                }
+            }).then(res => {
+                if (this.comment.children instanceof Array) {
+                    this.comment.children.push({
+                        id: res._id,
+                        parent_id: res.parent_id,
+                        post_id: res.post_id,
+                        author_name: res.author_name,
+                        content: res.content,
+                        date_created: res.date_created,
+                        children: res.children
+                    })
+                }
 
+                this.replyVisible = false;
+                this.replyAuthor = '';
+                this.replyContent = '';
+            }).catch(err => {
+                alert('Something went wrong :/');
+            });
         }
     },
     beforeCreate () {
