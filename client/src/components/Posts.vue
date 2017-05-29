@@ -5,8 +5,9 @@
             <span class="title">{{ post.title }}</span>
             <div class="name-date">
                 <span>{{ post.author_name }}</span>
-                <span>{{ post.date_created }}</span>
+                <span>{{ formatDate(post.date_created) }}</span>
             </div>
+            <div>Updated: {{ formatDate(post.last_time_edited)}}</div>
             <p v-html="post.content" class="content"></p>
             <router-link :to="{ path: `/post/${post._id}`}">{{ $t('home.read_more') }}...</router-link>
         </div>
@@ -14,7 +15,8 @@
 </template>
 // ------------------------------ SCRIPT -----------------------------------------
 <script>
-import { callApi } from './../services/api.service'
+import { callApi } from './../services/api.service';
+import { getNiceDate } from './../utils/dateFormatter';
 
 export default {
     data () {
@@ -26,6 +28,11 @@ export default {
         callApi('posts')
             .then(data => {this.posts = data.posts})
             .catch(err => console.log(err));
+    },
+    methods: {
+        formatDate (dateString) {
+            return getNiceDate(dateString);
+        }
     }
 }
 </script>
@@ -56,7 +63,6 @@ export default {
 
     .name-date {
         display: flex;
-        margin-bottom: 35px;
     }
 
     .name-date span:first-child {

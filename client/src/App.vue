@@ -1,3 +1,4 @@
+<!--suppress CssUnusedSymbol -->
 <template>
     <div class="root-wrapper">
         <nav>
@@ -108,6 +109,8 @@ export default {
         text-decoration: none;
     }
 
+
+    /* Styles for vue-router transitions */
     .fade-enter-active, .fade-leave-active {
         transition-property: opacity;
         transition-duration: .16s;
@@ -122,7 +125,14 @@ export default {
     }
 
 
+    /* Have to set top level comments' styles here because of scope and recursion */
+    .root-comments-wrapper > div > div {
+        margin-left: 0 !important;
+        border-left: none !important;
+    }
 
+
+    /* Global styling for buttons, links etc. */
     button {
         display: inline-block;
         font-size: 15px;

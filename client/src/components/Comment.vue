@@ -2,13 +2,16 @@
 <template>
     <div class="comment-wrapper">
         <div class="comment-data-wrapper">
-            <div><span>&#149;</span> {{comment.author_name}} | {{(comment.date_created + "").slice(0, 15)}}</div>
-            <div>{{comment.content}}</div>
-            <button @click="toggleReply">{{ $t('comment.show_reply_button')}}</button>
+            <div class="comment-name-date"><span class="dot-mark">&#149;</span> {{comment.author_name}} | {{ formatDate(comment.date_created)}}</div>
+            <div class="comment-content">{{comment.content}}</div>
+            <div class="comment-reply-toggle" @click="showReply">{{ $t('comment.show_reply_button')}}</div>
             <div class="comment-reply" v-if="replyVisible">
                 <input v-model="replyAuthor" placeholder="Your name" type="text" value="Your name">
-                <textarea @keyup.enter="addReply" v-model="replyContent" placeholder="Write a reply..."></textarea>
-                <!--<button @click="addReply">{{ $t('comment.submit_reply_button')}}</button>-->
+                <textarea v-model="replyContent" placeholder="Write a reply..."></textarea>
+                <div class="comment-reply-buttons">
+                    <button @click="addReply">Save</button>
+                    <button @click="hideReply">Cancel</button>
+                </div>
             </div>
         </div>
 
@@ -19,6 +22,7 @@
 <script>
 import Comments from './Comments.vue';
 import { callApi } from './../services/api.service';
+import { getNiceDate } from './../utils/dateFormatter';
 
 export default {
     name: 'comment',
@@ -39,8 +43,14 @@ export default {
         Comments
     },
     methods: {
-        toggleReply () {
-            this.replyVisible = !this.replyVisible;
+        formatDate (dateString) {
+            return getNiceDate(dateString);
+        },
+        showReply () {
+            this.replyVisible = true;
+        },
+        hideReply () {
+            this.replyVisible = false;
         },
         addReply () {
             this.replyVisible = false;
@@ -84,9 +94,13 @@ export default {
 // -----------------------------------------------------------------------
 <style scoped>
     .comment-wrapper {
-        margin: 5px 0 0 50px;
-        padding: 5px 0 3px 10px;
-        border-left: 1px solid #fffffb;
+        margin: 5px 0 0 30px;
+        padding: 5px 0 3px 5px;
+        border-left: 1px solid #e0e0dc;
+    }
+
+    .comment-name-date {
+        font-size: 16px;
     }
 
     .comment-data-wrapper {
@@ -94,13 +108,9 @@ export default {
         flex-direction: column;
     }
 
-    .comment-data-wrapper span {
-        color: #000000;
-    }
-
     .comment-data-wrapper button {
-        /*height: 28px;*/
-        width: 80px;
+        height: 24px;
+        width: 83px;
     }
 
     .comment-data-wrapper textarea {
@@ -108,34 +118,43 @@ export default {
         width: 120px;
     }
 
-    .comment-data-wrapper > div:first-child {
-        color: #2179b4;
+    .comment-content {
+        margin-left: 8px;
     }
 
-    .comment-data-wrapper > div:nth-child(2) {
-
+    .comment-name-date {
+        color: #1c6a9f;
     }
 
-    .comment-data-wrapper > div:last-child {
-        font-size: 21px;
+    .comment-reply-toggle {
+        color: #247fc2;
+        cursor: pointer;
+        margin-left: 8px;
+        font-size: 13px;
     }
 
     .comment-reply {
         display: flex;
         flex-direction: column;
         border: 1px solid #f5f5f5;
-        background-color: #e7e7e7;
     }
 
-    .comment-reply input{
+    .comment-reply input {
         margin-top: 5px;
         width: 130px;
     }
 
     .comment-reply textarea {
         margin-top: 5px;
-        /*width: 160px;*/
-        width: 90%;
+        width: 50%;
         height: 60px;
+    }
+
+    .comment-reply-buttons {
+        display: flex;
+    }
+
+    .comment-reply-buttons > button:first-child {
+        margin-right: 10px;
     }
 </style>

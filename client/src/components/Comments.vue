@@ -26,7 +26,6 @@ export default {
     .comments-wrapper {
         display: flex;
         flex-direction: column;
-        width: 60%;
         margin-bottom: 15px;
     }
 </style>

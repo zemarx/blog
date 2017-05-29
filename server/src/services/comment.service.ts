@@ -19,7 +19,7 @@ export default class CommentService {
         // Create a json tree object from adjacent list of comments
         let commentTree = makeTree(comments);
 
-        return commentTree;
+        return JSON.stringify(commentTree);
     }
 
     // Add new comment to a particular post
@@ -35,7 +35,7 @@ export default class CommentService {
             .insert({
                 _id: new ObjectId(),
                 post_id: (post_id !== '' && post_id !== null && post_id !== 'null') ? new ObjectId(post_id) : null,
-                parent_id: (parent_id !== '' || parent_id !== null || parent_id !== 'null') ? parent_id : null,
+                parent_id: (parent_id === '' || parent_id === null || parent_id === 'null') ? null : parent_id,
                 author_name: author_name,
                 content: content,
                 date_created: new Date(),

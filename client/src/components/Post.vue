@@ -5,8 +5,10 @@
             <span class="title">{{ post.title }}</span>
             <div class="name-date">
                 <span>{{ post.author_name }}</span>
-                <span>{{ post.date_created }}</span>
+                <span>{{ formatDate(post.date_created) }}</span>
             </div>
+            <div>Updated: {{ formatDate(post.last_time_edited) }}</div>
+
             <p v-html="post.content" class="content"></p>
 
             <div>
@@ -15,7 +17,7 @@
             </div>
         </div>
 
-        <div class="comments-wrapper">
+        <div class="root-comments-wrapper">
             <comments :comments="comments"></comments>
         </div>
 
@@ -31,6 +33,7 @@
 import Comments from './Comments.vue';
 import { callApi } from './../services/api.service';
 import auth from './../services/auth.service';
+import { getNiceDate } from './../utils/dateFormatter';
 
 export default {
     data () {
@@ -43,6 +46,9 @@ export default {
         }
     },
     methods: {
+        formatDate (dateString) {
+            return getNiceDate(dateString);
+        },
         editPost () {
             this.$router.push('/editpost?id=' + this.post._id)
         },
@@ -105,10 +111,9 @@ export default {
 <style scoped>
     .post-wrapper {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
         width: 100%;
-        /*height: 100%;*/
         background-color: #ffffff;
     }
 
@@ -130,7 +135,6 @@ export default {
 
     .name-date {
         display: flex;
-        margin-bottom: 35px;
     }
 
     .name-date span:first-child {
@@ -149,7 +153,7 @@ export default {
         font-size: 23px;
     }
 
-    .comments-wrapper {
+    .root-comments-wrapper {
         width: 60%;
     }
 
@@ -157,70 +161,7 @@ export default {
         display: flex;
         flex-direction: column;
         width: 60%;
-        height: 130px;
 
         margin: 40px 0 70px 0;
     }
 </style>
-
-
-<!--[
-                {
-                    "id": 1,
-                    "author_name": "Mark",
-                    "date_created": new Date(),
-                    "content": "Good post",
-                    "children": [
-                        {
-                            "id": 2,
-                            "author_name": "Parker",
-                            "date_created": new Date(),
-                            "content": "Amazing post",
-                            "children": []
-                        },
-                        {
-                            "id": 3,
-                            "author_name": "Hulk",
-                            "date_created": new Date(),
-                            "content": "Horrible post",
-                            "children": []
-                        },
-                    ]
-                },
-                {
-                    "id": 4,
-                    "author_name": "Batman",
-                    "date_created": new Date(),
-                    "content": "Great post",
-                    "children": [
-                        {
-                            "id": 5,
-                            "author_name": "Quentin",
-                            "date_created": new Date(),
-                            "content": "Awful post",
-                            "children": []
-                        },
-                        {
-                            "id": 6,
-                            "author_name": "Bruce",
-                            "date_created": new Date(),
-                            "content": "Terrific post",
-                            "children": []
-                        },
-                    ]
-                },
-                {
-                    "id": 7,
-                    "author_name": "Barry",
-                    "date_created": new Date(),
-                    "content": "Fantastic post",
-                    "children": []
-                },
-                {
-                    "id": 8,
-                    "author_name": "Jordan",
-                    "date_created": new Date(),
-                    "content": "Bad post",
-                    "children": []
-                },
-            ]-->
