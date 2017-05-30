@@ -1,7 +1,7 @@
 // import { sanitize } from 'sanitize-html';
 import DatabaseService from './database.service';
-import {ObjectId} from 'mongodb';
-import buildTree from '../utils/makeTree';
+import { ObjectId } from 'mongodb';
+import buildTree from '../utils/buildCommentTree';
 
 const dbService = new DatabaseService();
 
