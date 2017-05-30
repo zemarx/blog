@@ -8,6 +8,9 @@
             <div class="comment-reply" v-if="replyVisible">
                 <input v-model="replyAuthor" placeholder="Your name" type="text" value="Your name">
                 <textarea v-model="replyContent" placeholder="Write a reply..."></textarea>
+
+                <div v-if="isInputError" class="input-error">You have to fill all the fields</div>
+
                 <div class="comment-reply-buttons">
                     <button @click="addReply">Save</button>
                     <button @click="hideReply">Cancel</button>
@@ -28,6 +31,7 @@ export default {
     name: 'comment',
     data () {
         return {
+            isInputError: false,
             replyAuthor: '',
             replyContent: '',
             replyVisible: false
@@ -50,9 +54,17 @@ export default {
             this.replyVisible = true;
         },
         hideReply () {
+            this.isInputError = false;
             this.replyVisible = false;
         },
         addReply () {
+            // check that inputs aren't empty
+            if (this.replyAuthor.trim() === '' || this.replyContent.trim() === '') {
+                this.isInputError = true;
+                return;
+            }
+
+            this.isInputError = false;
             this.replyVisible = false;
 
             callApi('comments', 'POST', {
@@ -156,5 +168,10 @@ export default {
 
     .comment-reply-buttons > button:first-child {
         margin-right: 10px;
+    }
+
+    .input-error {
+        color: #e70000;
+        margin: 3px 0 3px 0;
     }
 </style>

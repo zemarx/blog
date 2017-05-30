@@ -150,4 +150,9 @@ export default {
         border: 1px solid #dedede;
     }
 
+
+    a {
+        color: #353535;
+    }
+
 </style>
