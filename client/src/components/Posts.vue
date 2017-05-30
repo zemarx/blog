@@ -7,7 +7,7 @@
                 <span>{{ post.author_name }}</span>
                 <span>{{ formatDate(post.date_created) }}</span>
             </div>
-            <div>Updated: {{ formatDate(post.last_time_edited)}}</div>
+            <div v-if="post.last_time_edited">Updated: {{ formatDate(post.last_time_edited)}}</div>
             <p v-html="post.content" class="content"></p>
             <router-link :to="{ path: `/post/${post._id}`}">{{ $t('home.read_more') }}...</router-link>
         </div>

@@ -89,7 +89,7 @@ export default {
 
             if (this.authorName.length <= 0 || this.title.length <= 0 || this.content.length <= 0) return;
 
-            callApi(endpoint, method, JSON.stringify({
+            callApi(endpoint, method, {
                 post: {
                     _id: this.id || null,
                     author_name: this.authorName,
@@ -97,9 +97,7 @@ export default {
                     content: this.content,
                     date_created: this.dateCreated || null
                 }
-            })).then(data => {
-                console.log(JSON.stringify(data, null, 2));
-
+            }).then(data => {
                 this.$router.replace('/');
             }).catch(err => console.log(err));
         }

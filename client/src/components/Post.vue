@@ -7,7 +7,7 @@
                 <span>{{ post.author_name }}</span>
                 <span>{{ formatDate(post.date_created) }}</span>
             </div>
-            <div>Updated: {{ formatDate(post.last_time_edited) }}</div>
+            <div v-if="post.last_time_edited">Updated: {{ formatDate(post.last_time_edited) }}</div>
 
             <p v-html="post.content" class="content"></p>
 
@@ -21,11 +21,15 @@
             <comments :comments="comments"></comments>
         </div>
 
-        <div class="add-comment-wrapper">
+
+        <form v-on:submit.prevent="submitComment" class="add-comment-wrapper">
             <input v-model="commentAuthor" type="text" id="author_name" placeholder="Your name...">
-            <textarea v-model="commentContent" name="" cols="30" rows="5" placeholder="What do you think?"></textarea>
-            <button @click="addComment">{{ $t('selected_post.submit_comment_button') }}</button>
-        </div>
+            <textarea v-model="commentContent" cols="30" rows="5" placeholder="What do you think?"></textarea>
+
+            <div v-if="isInputError" class="input-error">You have to fill all the fields</div>
+
+            <button type="submit">{{ $t('selected_post.submit_comment_button') }}</button>
+        </form>
     </div>
 </template>
 // -----------------------------------------------------------------------
@@ -39,6 +43,7 @@ export default {
     data () {
         return {
             loggedIn: auth.loggedIn(),
+            isInputError: false,
             commentAuthor: '',
             commentContent: '',
             post: {},
@@ -64,7 +69,15 @@ export default {
             }
         },
 
-        addComment () {
+        submitComment () {
+            // check that inputs aren't empty
+            if (this.commentAuthor.trim() === '' || this.commentContent.trim() === '') {
+                this.isInputError = true;
+                return;
+            }
+
+            this.isInputError = false;
+
             callApi('comments', 'POST', {
                 comment: {
                     _id: '',
@@ -100,7 +113,7 @@ export default {
 
         callApi(`comments?post_id=${this.$route.params.post_id}`).then(data => {
             this.comments = data;
-        })
+        });
     },
     components: {
         Comments
@@ -163,5 +176,10 @@ export default {
         width: 60%;
 
         margin: 40px 0 70px 0;
+    }
+
+    .input-error {
+        color: #e70000;
+        margin: 3px 0 3px 0;
     }
 </style>
