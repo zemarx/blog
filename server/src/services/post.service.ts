@@ -1,3 +1,5 @@
+'use strict';
+
 import DatabaseService from './database.service';
 import { ObjectId } from 'mongodb';
 
@@ -83,10 +85,8 @@ export default class PostService {
     }
 
 
-    // Deleted post and returns status text
-
-    // TODO: deletion actually will make the post archived, so that is can be later restored if necessary
-
+    // "Delete" post and returns status text
+    // "Deletion" actually will make the post archived, so that is can be later restored if necessary
     public async deletePost(id: string) {
         // let results = await db.connection().collection('posts').removeOne({ _id: new ObjectId(id) }); // obsolete method
 

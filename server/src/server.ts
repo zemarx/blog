@@ -1,7 +1,7 @@
 'use strict';
 
 import * as Koa from 'koa';
-import { postRoutesPublic, postRoutesPrivate} from './routes/post.routes';
+import { postRoutesPublic, postRoutesPrivate } from './routes/post.routes';
 import commentRoutes from './routes/comment.routes';
 import userRoutes from './routes/user.routes';
 import config from './config/config';
@@ -16,8 +16,6 @@ const bodyparser = require('koa-bodyparser');
 
 const databaseService = new DatabaseService();
 const app = new Koa();
-
-// TODO: when merging new server side, change paths below
 
 let clientIndexPath = '';
 

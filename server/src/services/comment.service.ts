@@ -1,3 +1,5 @@
+'use strict';
+
 // import { sanitize } from 'sanitize-html';
 import DatabaseService from './database.service';
 import { ObjectId } from 'mongodb';
@@ -8,7 +10,7 @@ const dbService = new DatabaseService();
 export default class CommentService {
     constructor() {}
 
-    // Get all comments of a post with 'postId'
+    // Get all comments of a post with 'post_id'
     public async getPostComments(post_id: string) {
         let comments = await dbService
             .connection()

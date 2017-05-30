@@ -1,4 +1,6 @@
-import {MongoClient} from 'mongodb';
+'use strict';
+
+import { MongoClient } from 'mongodb';
 
 let db_con;
 

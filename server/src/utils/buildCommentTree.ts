@@ -1,3 +1,4 @@
+'use strict';
 
 // This function recieves flat tree as argument and
 // creates a json object tree with all the parents and children

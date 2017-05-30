@@ -1,15 +1,12 @@
 'use strict';
 
 import * as Router from 'koa-router';
-// import AuthService from './../services/auth.service';
 import config from './../config/config';
 
 const jwt = require('jsonwebtoken');
 const router = new Router({ prefix: '/api'});
-// const authService = new AuthService();
 
 // Attempt to login user
-// In the request body might be login(email) and password
 router.post('/login', async (ctx, next) => {
     console.log('Requested login');
 
@@ -30,14 +27,13 @@ router.post('/login', async (ctx, next) => {
     // IN THE FUTURE 'PASSWORD' ISN'T STORED IN PLAIN TEXT, INSTEAD STORE HASHES
     // SO IN THE NEXT LINE CHECK HASHES
 
-
     console.log(email);
     console.log(password);
 
     // static email and password for now
     if (email === 'root' && password === 'toor') {
         // generate jwt token
-        const token = jwt.sign({ data: 'test_data'}, config.jwt.secret, { expiresIn: '1h' });
+        const token = jwt.sign({ data: 'test_data'}, config.jwt.secret, { expiresIn: '10h' }); // token expires in 10 hours
 
         // send token as response
         ctx.body = {
