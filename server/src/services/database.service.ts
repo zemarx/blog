@@ -11,6 +11,7 @@ class DatabaseService {
     }
 
     // Returns a connection to the database
+    // This way the connection to the database can be reused
     public connection () {
         return db_con;
     }

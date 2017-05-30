@@ -1,7 +1,7 @@
 // import { sanitize } from 'sanitize-html';
 import DatabaseService from './database.service';
 import {ObjectId} from 'mongodb';
-import makeTree from '../utils/makeTree';
+import buildTree from '../utils/makeTree';
 
 const dbService = new DatabaseService();
 
@@ -17,7 +17,7 @@ export default class CommentService {
             .toArray();
 
         // Create a json tree object from adjacent list of comments
-        let commentTree = makeTree(comments);
+        let commentTree = buildTree(comments);
 
         return JSON.stringify(commentTree);
     }

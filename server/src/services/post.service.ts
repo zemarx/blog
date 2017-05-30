@@ -1,5 +1,6 @@
 import DatabaseService from './database.service';
-import {ObjectId} from 'mongodb';
+import { ObjectId } from 'mongodb';
+
 
 // Get a database service instance
 const db = new DatabaseService();
@@ -102,8 +103,6 @@ export default class PostService {
                         is_archived: true,
                     }
                 });
-
-
 
         let isSuccess = result.result.n === 1;
 

@@ -16,7 +16,7 @@
    }
 **/
 
-const makeTree = (flat_tree) => {
+const buildTree = (flat_tree) => {
     let nodes = [];
     let completeTree = [];
     let lookupList = {};
@@ -53,4 +53,4 @@ const makeTree = (flat_tree) => {
     return completeTree;
 };
 
-export default makeTree;
+export default buildTree;

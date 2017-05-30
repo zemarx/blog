@@ -1,12 +1,12 @@
 'use strict';
 
 import * as Router from 'koa-router';
-import AuthService from './../services/auth.service';
+// import AuthService from './../services/auth.service';
 import config from './../config/config';
 
 const jwt = require('jsonwebtoken');
 const router = new Router({ prefix: '/api'});
-const authService = new AuthService();
+// const authService = new AuthService();
 
 // Attempt to login user
 // In the request body might be login(email) and password

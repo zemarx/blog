@@ -1,5 +1,5 @@
 import DatabaseService from './database.service';
-import {ObjectId} from 'mongodb';
+import { ObjectId } from 'mongodb';
 
 // Get a database service instance
 const db = new DatabaseService();
