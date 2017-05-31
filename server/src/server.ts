@@ -25,6 +25,10 @@ if (process.env.NODE_ENV === 'production') {
     clientIndexPath = path.resolve(__dirname, './../../client/src/dist');
 }
 
+// Set static content path
+app.use(serve(clientIndexPath));
+
+
 // Setting cors
 app.use(cors());
 
@@ -35,6 +39,15 @@ app.use(bodyparser());
 app.use(userRoutes.routes());
 app.use(postRoutesPublic.routes());
 app.use(commentRoutes.routes());
+
+// This will send the index.html page to the client if none of the api routes are called
+app.use(async (ctx, next) => {
+    if (ctx.path.indexOf('/api') !== -1) {
+        await next()
+    } else {
+        await send(ctx, '/index.html', { root: clientIndexPath });
+    }
+});
 
 // Setting jwt token's checking
 app.use(async (ctx, next) => {
@@ -50,13 +63,6 @@ app.use(jwt({ secret: config.jwt.secret }));
 // Private routes
 app.use(postRoutesPrivate.routes());
 
-// Set static content path
-app.use(serve(clientIndexPath));
-
-// This will send the index.html page to the client
-app.use(async ctx => {
-    await send(ctx, '/index.html', { root: clientIndexPath });
-});
 
 // Start the server only after connecting to the database
 databaseService.connect(config.db.url).then(() => {
