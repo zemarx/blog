@@ -1,5 +1,6 @@
 ## Blog
 Blog made with Node.js, Koa and Vue
+Demo can be view at: http://ec2-52-58-236-133.eu-central-1.compute.amazonaws.com:3000/
 
 ## Server setup
 You need to get url to mongodb database
