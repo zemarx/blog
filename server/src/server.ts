@@ -42,8 +42,8 @@ app.use(commentRoutes.routes());
 
 // This will send the index.html page to the client if none of the api routes are called
 app.use(async (ctx, next) => {
-    if (ctx.path.indexOf('/api') !== -1) {
-        await next()
+    if (ctx.url.match(/^\/api.*/)) {
+        await next();
     } else {
         await send(ctx, '/index.html', { root: clientIndexPath });
     }
@@ -53,8 +53,13 @@ app.use(async (ctx, next) => {
 app.use(async (ctx, next) => {
     try {
         await next();
-    } catch(err) {
+    } catch (err) {
         // set err object's cors headers manually here, because koa strips away cors headers in case of 'throw' in koa-jwt package
+        err.headers = err.headers || {};
+        err.headers['Access-Control-Allow-Origin'] = '*';
+        err.headers['Access-Control-Allow-Methods'] = 'GET,HEAD,PUT,POST,DELETE';
+        err.headers['Access-Control-Allow-Headers'] = 'Origin,Content-Type,Authorization';
+        throw err;
     }
 });
 
